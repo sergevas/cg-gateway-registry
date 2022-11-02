@@ -1,4 +1,4 @@
-package dev.sergevas.cg.entity;
+package dev.sergevas.cg.gateway.entity;
 
 
 import javax.persistence.GeneratedValue;
