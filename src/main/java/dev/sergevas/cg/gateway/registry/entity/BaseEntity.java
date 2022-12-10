@@ -1,9 +1,9 @@
-package dev.sergevas.cg.gateway.entity;
+package dev.sergevas.cg.gateway.registry.entity;
 
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import java.util.Objects;
 import java.util.StringJoiner;
 
