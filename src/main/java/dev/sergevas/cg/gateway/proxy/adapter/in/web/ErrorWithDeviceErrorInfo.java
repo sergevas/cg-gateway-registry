@@ -1,4 +1,4 @@
-package dev.sergevas.cg.gateway.registry.boundary.model;
+package dev.sergevas.cg.gateway.proxy.adapter.in.web;
 
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.validation.Valid;

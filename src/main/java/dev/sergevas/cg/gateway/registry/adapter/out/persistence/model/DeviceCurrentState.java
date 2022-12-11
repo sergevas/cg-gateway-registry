@@ -1,6 +1,7 @@
-package dev.sergevas.cg.gateway.registry.entity;
+package dev.sergevas.cg.gateway.registry.adapter.out.persistence.model;
 
 import jakarta.persistence.Entity;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 

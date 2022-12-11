@@ -1,10 +1,11 @@
-package dev.sergevas.cg.gateway.registry.entity;
+package dev.sergevas.cg.gateway.registry.adapter.out.persistence.model;
 
 import jakarta.persistence.Entity;
+
 import java.util.StringJoiner;
 
 @Entity
-public class DeviceRegistration extends  BaseEntity {
+public class DeviceRegistration extends BaseEntity {
 
     private String deviceId;
     private String deviceType;

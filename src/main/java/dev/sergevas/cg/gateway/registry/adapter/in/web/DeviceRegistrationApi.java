@@ -1,12 +1,11 @@
-package dev.sergevas.cg.gateway.registry.boundary.api;
+package dev.sergevas.cg.gateway.registry.adapter.in.web;
 
-import dev.sergevas.cg.gateway.registry.boundary.model.DeviceRegistrationType;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("devices")
+@Path("registry/devices")
 public class DeviceRegistrationApi {
     @GET
     @Produces({MediaType.APPLICATION_JSON})

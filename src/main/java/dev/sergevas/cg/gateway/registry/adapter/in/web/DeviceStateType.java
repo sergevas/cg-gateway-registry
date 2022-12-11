@@ -1,4 +1,4 @@
-package dev.sergevas.cg.gateway.registry.boundary.model;
+package dev.sergevas.cg.gateway.registry.adapter.in.web;
 
 import jakarta.json.bind.annotation.JsonbCreator;
 import jakarta.json.bind.annotation.JsonbProperty;
@@ -10,11 +10,11 @@ import jakarta.json.bind.annotation.JsonbProperty;
 /**
  * Device possible states
  */
-public enum DeviceStateType {
-    ACTIVE("active"),
-    SLEEPING("sleeping"),
-    STOPPED("stopped"),
-    ERROR("error");
+enum DeviceStateType {
+    ACTIVE("ACTIVE"),
+    SLEEPING("SLEEPING"),
+    STOPPED("STOPPED"),
+    ERROR("ERROR");
 
     private String value;
 

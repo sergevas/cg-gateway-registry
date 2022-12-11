@@ -1,4 +1,4 @@
-package dev.sergevas.cg.gateway.registry.boundary.model;
+package dev.sergevas.cg.gateway.registry.adapter.in.web;
 
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.validation.Valid;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class DeviceRegistrationType {
+class DeviceRegistrationType {
 
     private @Valid String deviceType = null;
     private @Valid String deviceId = null;

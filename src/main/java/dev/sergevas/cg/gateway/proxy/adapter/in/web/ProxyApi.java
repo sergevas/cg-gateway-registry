@@ -1,12 +1,12 @@
-package dev.sergevas.cg.gateway.registry.boundary.api;
+package dev.sergevas.cg.gateway.proxy.adapter.in.web;
 
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("devices")
-public class DeviceGatewayApi {
+@Path("proxy/devices")
+public class ProxyApi {
 
     @GET
     @Path("/{deviceId}/{deviceResource}")
