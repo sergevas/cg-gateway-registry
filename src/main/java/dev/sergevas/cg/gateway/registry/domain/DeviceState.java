@@ -5,45 +5,28 @@ import java.util.StringJoiner;
 
 public class DeviceState {
 
-    public enum StateType {
-        ACTIVE("ACTIVE"),
-        SLEEPING("SLEEPING"),
-        STOPPED("STOPPED"),
-        ERROR("ERROR");
+    public String deviceId;
+    public DeviceStateType stateType;
 
-        private String type;
-
-        private StateType(String mode) {
-            this.type = mode;
-        }
-
-        public String getType() {
-            return type;
-        }
-    }
-
-    public DeviceId deviceId;
-    public StateType stateType;
-
-    public DeviceState(DeviceId deviceId, StateType stateType) {
+    public DeviceState(String deviceId, DeviceStateType stateType) {
         this.deviceId = deviceId;
         this.stateType = stateType;
     }
 
-    public DeviceId getDeviceId() {
+    public String getDeviceId() {
         return deviceId;
     }
 
-    public DeviceState setDeviceId(DeviceId deviceId) {
+    public DeviceState setDeviceId(String deviceId) {
         this.deviceId = deviceId;
         return this;
     }
 
-    public StateType getStateType() {
+    public DeviceStateType getStateType() {
         return stateType;
     }
 
-    public DeviceState setStateType(StateType stateType) {
+    public DeviceState setStateType(DeviceStateType stateType) {
         this.stateType = stateType;
         return this;
     }
@@ -64,7 +47,7 @@ public class DeviceState {
     @Override
     public String toString() {
         return new StringJoiner(", ", DeviceState.class.getSimpleName() + "[", "]")
-                .add("deviceId=" + deviceId)
+                .add("deviceId='" + deviceId + "'")
                 .add("stateType=" + stateType)
                 .toString();
     }

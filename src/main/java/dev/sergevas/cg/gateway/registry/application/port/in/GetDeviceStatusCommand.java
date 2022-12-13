@@ -7,13 +7,13 @@ import jakarta.validation.constraints.Size;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class DeviceCurrentStatusCommand extends SelfValidating<DeviceCurrentStatusCommand> {
+public class GetDeviceStatusCommand extends SelfValidating<GetDeviceStatusCommand> {
 
     @NotNull
     @Size(max = 4)
     private final String deviceId;
 
-    public DeviceCurrentStatusCommand(String deviceId) {
+    public GetDeviceStatusCommand(String deviceId) {
         this.deviceId = deviceId;
         super.validateSelf();
     }
@@ -26,7 +26,7 @@ public class DeviceCurrentStatusCommand extends SelfValidating<DeviceCurrentStat
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DeviceCurrentStatusCommand that = (DeviceCurrentStatusCommand) o;
+        GetDeviceStatusCommand that = (GetDeviceStatusCommand) o;
         return Objects.equals(deviceId, that.deviceId);
     }
 
@@ -37,7 +37,7 @@ public class DeviceCurrentStatusCommand extends SelfValidating<DeviceCurrentStat
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", DeviceCurrentStatusCommand.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", GetDeviceStatusCommand.class.getSimpleName() + "[", "]")
                 .add("deviceId='" + deviceId + "'")
                 .toString();
     }

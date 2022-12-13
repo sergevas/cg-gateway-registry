@@ -6,13 +6,13 @@ import java.util.StringJoiner;
 
 public class DeviceRegistration {
 
-    private DeviceId deviceId;
+    private String deviceId;
     private String deviceType;
     private String deviceUri;
     private Integer statusUpdatePeriod;
     private List<String> deviceTags;
 
-    public DeviceRegistration(DeviceId deviceId, String deviceType, String deviceUri, Integer statusUpdatePeriod, List<String> deviceTags) {
+    public DeviceRegistration(String deviceId, String deviceType, String deviceUri, Integer statusUpdatePeriod, List<String> deviceTags) {
         this.deviceId = deviceId;
         this.deviceType = deviceType;
         this.deviceUri = deviceUri;
@@ -20,49 +20,44 @@ public class DeviceRegistration {
         this.deviceTags = deviceTags;
     }
 
-    public DeviceId deviceId() {
+    public String getDeviceId() {
         return deviceId;
     }
 
-    public String deviceType() {
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public String getDeviceType() {
         return deviceType;
     }
 
-    public String deviceUri() {
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public String getDeviceUri() {
         return deviceUri;
     }
 
-    public Integer statusUpdatePeriod() {
+    public void setDeviceUri(String deviceUri) {
+        this.deviceUri = deviceUri;
+    }
+
+    public Integer getStatusUpdatePeriod() {
         return statusUpdatePeriod;
     }
 
-    public List<String> deviceTags() {
+    public void setStatusUpdatePeriod(Integer statusUpdatePeriod) {
+        this.statusUpdatePeriod = statusUpdatePeriod;
+    }
+
+    public List<String> getDeviceTags() {
         return deviceTags;
     }
 
-    public DeviceRegistration setDeviceId(DeviceId deviceId) {
-        this.deviceId = deviceId;
-        return this;
-    }
-
-    public DeviceRegistration setDeviceType(String deviceType) {
-        this.deviceType = deviceType;
-        return this;
-    }
-
-    public DeviceRegistration setDeviceUri(String deviceUri) {
-        this.deviceUri = deviceUri;
-        return this;
-    }
-
-    public DeviceRegistration setStatusUpdatePeriod(Integer statusUpdatePeriod) {
-        this.statusUpdatePeriod = statusUpdatePeriod;
-        return this;
-    }
-
-    public DeviceRegistration setDeviceTags(List<String> deviceTags) {
+    public void setDeviceTags(List<String> deviceTags) {
         this.deviceTags = deviceTags;
-        return this;
     }
 
     @Override
@@ -85,7 +80,7 @@ public class DeviceRegistration {
     @Override
     public String toString() {
         return new StringJoiner(", ", DeviceRegistration.class.getSimpleName() + "[", "]")
-                .add("deviceId=" + deviceId)
+                .add("deviceId='" + deviceId + "'")
                 .add("deviceType='" + deviceType + "'")
                 .add("deviceUri='" + deviceUri + "'")
                 .add("statusUpdatePeriod=" + statusUpdatePeriod)

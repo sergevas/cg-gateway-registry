@@ -1,4 +1,4 @@
-package dev.sergevas.cg.gateway.registry.adapter.out.persistence.model;
+package dev.sergevas.cg.gateway.registry.adapter.out.persistence;
 
 import jakarta.persistence.Entity;
 

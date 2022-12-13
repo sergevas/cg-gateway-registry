@@ -4,11 +4,11 @@ import dev.sergevas.cg.gateway.registry.domain.DeviceState;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-class DeviceCurrentStateMapper {
+class ToDeviceCurrentStateTypeMapper {
 
-    DeviceCurrentStateType toDeviceCurrentStateType(DeviceState deviceState) {
+    DeviceCurrentStateType map(DeviceState deviceState) {
         return new DeviceCurrentStateType()
-                .deviceId(deviceState.deviceId.getId())
+                .deviceId(deviceState.getDeviceId())
                 .deviceState(DeviceStateType.fromValue(deviceState.getStateType().getType()));
     }
 }
