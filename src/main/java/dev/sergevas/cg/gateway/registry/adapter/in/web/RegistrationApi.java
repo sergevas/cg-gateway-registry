@@ -6,7 +6,11 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("registry/devices")
-class RegistrationApi {
+public class RegistrationApi {
+
+    public RegistrationApi() {
+    }
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response getRegisteredDevices() {

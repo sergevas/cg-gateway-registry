@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
-class Error {
+public class Error {
 
     private @Valid String errorCode = null;
 

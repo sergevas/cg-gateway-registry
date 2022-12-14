@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-class DeviceRegistrationType {
+public class DeviceRegistrationType {
 
     private @Valid String deviceType = null;
     private @Valid String deviceId = null;

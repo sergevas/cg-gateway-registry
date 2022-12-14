@@ -10,28 +10,24 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("registry/devices/{deviceId}/status")
-class StatusApi {
+public class StatusApi {
 
-    private final GetDeviceStatusQuery getDeviceCurrentStateQuery;
-    private final UpdateDeviceStatusUseCase updateDeviceStatusUseCase;
-    private final ToDeviceCurrentStateTypeMapper deviceCurrentStateMapper;
-    private final ToUpdateDeviceStatusCommandMapper toUpdateDeviceStatusCommandMapper;
+    public StatusApi() {
+    }
 
     @Inject
-    StatusApi(GetDeviceStatusQuery getDeviceCurrentStateQuery,
-              UpdateDeviceStatusUseCase updateDeviceStatusUseCase,
-              ToDeviceCurrentStateTypeMapper deviceCurrentStateMapper,
-              ToUpdateDeviceStatusCommandMapper toUpdateDeviceStatusCommandMapper) {
-        this.getDeviceCurrentStateQuery = getDeviceCurrentStateQuery;
-        this.updateDeviceStatusUseCase = updateDeviceStatusUseCase;
-        this.deviceCurrentStateMapper = deviceCurrentStateMapper;
-        this.toUpdateDeviceStatusCommandMapper = toUpdateDeviceStatusCommandMapper;
-    }
+    private GetDeviceStatusQuery getDeviceCurrentStateQuery;
+    @Inject
+    private  UpdateDeviceStatusUseCase updateDeviceStatusUseCase;
+    @Inject
+    private  ToDeviceCurrentStateTypeMapper toDeviceCurrentStateMapper;
+    @Inject
+    private  ToUpdateDeviceStatusCommandMapper toUpdateDeviceStatusCommandMapper;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response getDeviceStatus(@PathParam("deviceId") String deviceId) {
-        DeviceCurrentStateType currentStateType = this.deviceCurrentStateMapper
+        DeviceCurrentStateType currentStateType = this.toDeviceCurrentStateMapper
                 .map(this.getDeviceCurrentStateQuery
                         .getDeviceStatus(new GetDeviceStatusCommand(deviceId)));
         return Response.ok().entity(currentStateType).build();
@@ -42,7 +38,7 @@ class StatusApi {
     @Produces({MediaType.APPLICATION_JSON})
     public Response updateDeviceStatus(@PathParam("deviceId") String deviceId, DeviceCurrentStateType currentState) {
         UpdateDeviceStatusCommand updateDeviceStatusCommand = this.toUpdateDeviceStatusCommandMapper.map(deviceId, currentState);
-        DeviceCurrentStateType currentStateType = this.deviceCurrentStateMapper
+        DeviceCurrentStateType currentStateType = this.toDeviceCurrentStateMapper
                 .map(this.updateDeviceStatusUseCase.updateDeviceStatus(updateDeviceStatusCommand));
         return Response.ok().entity(currentStateType).build();
     }

@@ -10,7 +10,7 @@ import jakarta.json.bind.annotation.JsonbProperty;
 /**
  * Device possible states
  */
-enum DeviceStateType {
+public enum DeviceStateType {
     ACTIVE("ACTIVE"),
     SLEEPING("SLEEPING"),
     STOPPED("STOPPED"),

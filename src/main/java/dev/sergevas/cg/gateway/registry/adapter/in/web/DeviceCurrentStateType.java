@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
-class DeviceCurrentStateType {
+public class DeviceCurrentStateType {
 
     private @Valid String deviceId = null;
     private @Valid DeviceStateType deviceState = null;
