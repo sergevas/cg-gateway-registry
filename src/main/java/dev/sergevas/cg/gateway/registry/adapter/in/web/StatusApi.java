@@ -11,35 +11,28 @@ import jakarta.ws.rs.core.Response;
 
 @Path("registry/devices/{deviceId}/status")
 public class StatusApi {
-
-    public StatusApi() {
-    }
-
     @Inject
     private GetDeviceStatusQuery getDeviceCurrentStateQuery;
     @Inject
-    private  UpdateDeviceStatusUseCase updateDeviceStatusUseCase;
+    private UpdateDeviceStatusUseCase updateDeviceStatusUseCase;
     @Inject
-    private  ToDeviceCurrentStateTypeMapper toDeviceCurrentStateMapper;
+    private ToDeviceCurrentStateTypeMapper toDeviceCurrentStateMapper;
     @Inject
-    private  ToUpdateDeviceStatusCommandMapper toUpdateDeviceStatusCommandMapper;
+    private ToUpdateDeviceStatusCommandMapper toUpdateDeviceStatusCommandMapper;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response getDeviceStatus(@PathParam("deviceId") String deviceId) {
-        DeviceCurrentStateType currentStateType = this.toDeviceCurrentStateMapper
-                .map(this.getDeviceCurrentStateQuery
-                        .getDeviceStatus(new GetDeviceStatusCommand(deviceId)));
+        DeviceStateType currentStateType = this.toDeviceCurrentStateMapper.map(this.getDeviceCurrentStateQuery.getDeviceStatus(new GetDeviceStatusCommand(deviceId)));
         return Response.ok().entity(currentStateType).build();
     }
 
     @PUT
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response updateDeviceStatus(@PathParam("deviceId") String deviceId, DeviceCurrentStateType currentState) {
-        UpdateDeviceStatusCommand updateDeviceStatusCommand = this.toUpdateDeviceStatusCommandMapper.map(deviceId, currentState);
-        DeviceCurrentStateType currentStateType = this.toDeviceCurrentStateMapper
-                .map(this.updateDeviceStatusUseCase.updateDeviceStatus(updateDeviceStatusCommand));
+    public Response updateDeviceStatus(@PathParam("deviceId") String deviceId, DeviceStateType stateType) {
+        UpdateDeviceStatusCommand updateDeviceStatusCommand = this.toUpdateDeviceStatusCommandMapper.map(deviceId, stateType);
+        DeviceStateType currentStateType = this.toDeviceCurrentStateMapper.map(this.updateDeviceStatusUseCase.updateDeviceStatus(updateDeviceStatusCommand));
         return Response.ok().entity(currentStateType).build();
     }
 }

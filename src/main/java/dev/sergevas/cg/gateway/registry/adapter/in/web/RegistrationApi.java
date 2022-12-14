@@ -8,37 +8,38 @@ import jakarta.ws.rs.core.Response;
 @Path("registry/devices")
 public class RegistrationApi {
 
-    public RegistrationApi() {
-    }
-
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response getRegisteredDevices() {
         return Response.ok().entity("magic!").build();
     }
+
     @GET
     @Path("{deviceId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getRegisteredDeviceInfo( @PathParam("deviceId") String deviceId) {
+    public Response getRegisteredDeviceInfo(@PathParam("deviceId") String deviceId) {
         return Response.ok().entity("magic!").build();
     }
+
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Response registerDevice(@Valid DeviceRegistrationType body) {
         return Response.ok().entity("magic!").build();
     }
+
     @PUT
     @Path("{deviceId}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response updateRegisteredDeviceInfo( @PathParam("deviceId") String deviceId, @Valid DeviceRegistrationType body) {
+    public Response updateRegisteredDeviceInfo(@PathParam("deviceId") String deviceId, @Valid DeviceRegistrationType body) {
         return Response.ok().entity("magic!").build();
     }
+
     @DELETE
     @Path("{deviceId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response deleteRegisteredDevice( @PathParam("deviceId") String deviceId) {
+    public Response deleteRegisteredDevice(@PathParam("deviceId") String deviceId) {
         return Response.ok().entity("magic!").build();
     }
 }
