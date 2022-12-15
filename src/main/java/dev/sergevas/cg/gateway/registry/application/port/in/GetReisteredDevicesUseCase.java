@@ -7,5 +7,5 @@ import java.util.List;
 public interface GetReisteredDevicesUseCase {
     List<RegisteredDevice> getRegisteredDevices();
 
-    RegisteredDevice getRegisteredDevice(RegisteredDeviceCommand registeredDeviceComand);
+    RegisteredDevice getRegisteredDevice(GetRegisteredDeviceCommand getRegisteredDeviceComand);
 }

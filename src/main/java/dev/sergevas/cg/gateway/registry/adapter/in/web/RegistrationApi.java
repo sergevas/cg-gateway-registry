@@ -1,5 +1,7 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web;
 
+import dev.sergevas.cg.gateway.registry.application.port.in.GetRegisteredDeviceQuery;
+import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -7,6 +9,9 @@ import jakarta.ws.rs.core.Response;
 
 @Path("registry/devices")
 public class RegistrationApi {
+
+    @Inject
+    private GetRegisteredDeviceQuery getRegisteredDeviceQuery;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
