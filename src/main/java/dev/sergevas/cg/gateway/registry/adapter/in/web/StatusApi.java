@@ -23,7 +23,8 @@ public class StatusApi {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response getDeviceStatus(@PathParam("deviceId") String deviceId) {
-        DeviceStateType currentStateType = this.toDeviceCurrentStateMapper.map(this.getDeviceCurrentStateQuery.getDeviceStatus(new GetDeviceStatusCommand(deviceId)));
+        DeviceStateType currentStateType = this.toDeviceCurrentStateMapper
+                .map(this.getDeviceCurrentStateQuery.getDeviceStatus(new GetDeviceStatusCommand(deviceId)));
         return Response.ok().entity(currentStateType).build();
     }
 
@@ -32,7 +33,8 @@ public class StatusApi {
     @Produces({MediaType.APPLICATION_JSON})
     public Response updateDeviceStatus(@PathParam("deviceId") String deviceId, DeviceStateType stateType) {
         UpdateDeviceStatusCommand updateDeviceStatusCommand = this.toUpdateDeviceStatusCommandMapper.map(deviceId, stateType);
-        DeviceStateType currentStateType = this.toDeviceCurrentStateMapper.map(this.updateDeviceStatusUseCase.updateDeviceStatus(updateDeviceStatusCommand));
+        DeviceStateType currentStateType = this.toDeviceCurrentStateMapper
+                .map(this.updateDeviceStatusUseCase.updateDeviceStatus(updateDeviceStatusCommand));
         return Response.ok().entity(currentStateType).build();
     }
 }

@@ -3,14 +3,12 @@ package dev.sergevas.cg.gateway.registry.application.port.in;
 import dev.sergevas.cg.gateway.registry.domain.DeviceStateType;
 import dev.sergevas.cg.gateway.shared.SelfValidating;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 import java.util.StringJoiner;
 
 public class UpdateDeviceStatusCommand extends SelfValidating<UpdateDeviceStatusCommand> {
 
-    @Size(max = 4)
     private final String deviceId;
     @NotNull
     private final DeviceStateType deviceStateType;

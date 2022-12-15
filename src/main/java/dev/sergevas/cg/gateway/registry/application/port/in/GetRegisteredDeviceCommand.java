@@ -2,14 +2,12 @@ package dev.sergevas.cg.gateway.registry.application.port.in;
 
 import dev.sergevas.cg.gateway.shared.SelfValidating;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 import java.util.StringJoiner;
 
 public class GetRegisteredDeviceCommand extends SelfValidating<GetRegisteredDeviceCommand> {
     @NotNull
-    @Size(max = 4)
     private final String deviceId;
 
     public GetRegisteredDeviceCommand(String deviceId) {

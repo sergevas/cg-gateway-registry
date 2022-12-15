@@ -1,29 +1,42 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web;
 
+import dev.sergevas.cg.gateway.registry.application.port.in.GetRegisteredDeviceCommand;
 import dev.sergevas.cg.gateway.registry.application.port.in.GetRegisteredDeviceQuery;
+import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.List;
+
 @Path("registry/devices")
 public class RegistrationApi {
 
     @Inject
     private GetRegisteredDeviceQuery getRegisteredDeviceQuery;
+    @Inject
+    private ToDeviceRegistrationTypeMapper toDeviceRegistrationTypeMapper;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response getRegisteredDevices() {
-        return Response.ok().entity("magic!").build();
+        List<DeviceRegistration> deviceRegistrations = getRegisteredDeviceQuery.getDevice();
+        List<DeviceRegistrationType> deviceRegistrationTypes = deviceRegistrations
+                .stream()
+                .map(toDeviceRegistrationTypeMapper::map)
+                .toList();
+        return Response.ok().entity(deviceRegistrationTypes).build();
     }
 
     @GET
     @Path("{deviceId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getRegisteredDeviceInfo(@PathParam("deviceId") String deviceId) {
-        return Response.ok().entity("magic!").build();
+        DeviceRegistrationType deviceRegistrationType = toDeviceRegistrationTypeMapper
+                .map(getRegisteredDeviceQuery.getDevice(new GetRegisteredDeviceCommand(deviceId)));
+        return Response.ok().entity(deviceRegistrationType).build();
     }
 
     @POST
