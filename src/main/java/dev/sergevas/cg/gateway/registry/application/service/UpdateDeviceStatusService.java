@@ -8,12 +8,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 @ApplicationScoped
-public class UpdateDeviceStatus implements UpdateDeviceStatusUseCase {
+public class UpdateDeviceStatusService implements UpdateDeviceStatusUseCase {
 
     private UpdateDeviceState updateDeviceState;
 
     @Inject
-    public UpdateDeviceStatus(UpdateDeviceState updateDeviceState) {
+    public UpdateDeviceStatusService(UpdateDeviceState updateDeviceState) {
         this.updateDeviceState = updateDeviceState;
     }
 
