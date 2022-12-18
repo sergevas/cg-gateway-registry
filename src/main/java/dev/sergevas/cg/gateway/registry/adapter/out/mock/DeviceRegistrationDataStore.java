@@ -4,9 +4,9 @@ import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ApplicationScoped
 public class DeviceRegistrationDataStore {
@@ -15,7 +15,7 @@ public class DeviceRegistrationDataStore {
 
     @PostConstruct
     void init() {
-        deviceRegistrationStore = new HashMap<>();
+        deviceRegistrationStore = new ConcurrentHashMap<>();
 
         deviceRegistrationStore.put("0001", new DeviceRegistration(
                 "0001",

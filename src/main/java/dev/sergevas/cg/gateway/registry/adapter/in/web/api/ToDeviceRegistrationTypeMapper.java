@@ -1,4 +1,4 @@
-package dev.sergevas.cg.gateway.registry.adapter.in.web;
+package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import jakarta.enterprise.context.ApplicationScoped;

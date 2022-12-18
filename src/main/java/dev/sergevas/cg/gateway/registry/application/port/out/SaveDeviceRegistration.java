@@ -2,7 +2,7 @@ package dev.sergevas.cg.gateway.registry.application.port.out;
 
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 
-public interface UpdateDeviceRegistration {
+public interface SaveDeviceRegistration {
 
-    DeviceRegistration update(DeviceRegistration deviceState);
+    DeviceRegistration save(DeviceRegistration deviceRegistration);
 }

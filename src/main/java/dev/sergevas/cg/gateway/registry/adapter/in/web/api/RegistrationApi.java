@@ -1,4 +1,4 @@
-package dev.sergevas.cg.gateway.registry.adapter.in.web;
+package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import dev.sergevas.cg.gateway.registry.application.port.in.GetRegisteredDeviceCommand;
 import dev.sergevas.cg.gateway.registry.application.port.in.GetRegisteredDeviceQuery;

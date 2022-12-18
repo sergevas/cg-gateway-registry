@@ -1,4 +1,4 @@
-package dev.sergevas.cg.gateway.registry.adapter.in.web;
+package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import jakarta.json.bind.annotation.JsonbCreator;
 import jakarta.json.bind.annotation.JsonbProperty;

@@ -1,11 +1,15 @@
 package dev.sergevas.cg.gateway.registry.domain;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 public class DeviceState {
 
     public String deviceId;
+    @Valid
     public DeviceStateType stateType;
 
     public DeviceState(String deviceId, DeviceStateType stateType) {

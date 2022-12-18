@@ -5,8 +5,8 @@ import dev.sergevas.cg.gateway.registry.domain.DeviceStateType;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @ApplicationScoped
 public class DeviceStateDataStore {
@@ -15,7 +15,7 @@ public class DeviceStateDataStore {
 
     @PostConstruct
     void init() {
-        deviceStateStore = new HashMap<>();
+        deviceStateStore = new ConcurrentHashMap<>();
         deviceStateStore.put("0001", new DeviceState("0001", DeviceStateType.ACTIVE));
         deviceStateStore.put("0002", new DeviceState("0002", DeviceStateType.ACTIVE));
         deviceStateStore.put("0003", new DeviceState("0003", DeviceStateType.STOPPED));
