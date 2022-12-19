@@ -10,7 +10,8 @@ import jakarta.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 @ApplicationScoped
-public class DeviceRegistrationAdapter implements LoadDeviceRegistration, SaveDeviceRegistration, DeleteDeviceRegistration {
+public class DeviceRegistrationAdapter implements LoadDeviceRegistration,
+        SaveDeviceRegistration,DeleteDeviceRegistration {
 
     @Inject
     DeviceRegistrationDataStore deviceRegistrationDataStore;

@@ -1,13 +1,13 @@
 package dev.sergevas.cg.gateway.registry.application.port.in;
 
 import dev.sergevas.cg.gateway.shared.SelfValidating;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Objects;
 import java.util.StringJoiner;
 
 public class DeleteRegisteredDeviceCommand extends SelfValidating<DeleteRegisteredDeviceCommand> {
-    @NotNull
+    @NotBlank
     private final String deviceId;
 
     public DeleteRegisteredDeviceCommand(String deviceId) {

@@ -1,6 +1,7 @@
 package dev.sergevas.cg.gateway.registry.domain;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.util.List;
 import java.util.Objects;
@@ -8,17 +9,22 @@ import java.util.StringJoiner;
 
 public class DeviceRegistration {
 
-    @NotNull
+    @NotBlank
     private String deviceId;
-    @NotNull
+    @NotBlank
     private String deviceType;
-    @NotNull
+    @NotBlank
     private String deviceUri;
-    @NotNull
+    @PositiveOrZero
     private Integer statusUpdatePeriod;
     private List<String> deviceTags;
 
-    public DeviceRegistration(String deviceId, String deviceType, String deviceUri, Integer statusUpdatePeriod, List<String> deviceTags) {
+    public DeviceRegistration(
+            String deviceId,
+            String deviceType,
+            String deviceUri,
+            Integer statusUpdatePeriod,
+            List<String> deviceTags) {
         this.deviceId = deviceId;
         this.deviceType = deviceType;
         this.deviceUri = deviceUri;
