@@ -3,21 +3,35 @@ package dev.sergevas.cg.gateway.registry.application.port.in;
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import dev.sergevas.cg.gateway.shared.SelfValidating;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 public class UpdateDeviceRegistrationCommand extends SelfValidating<UpdateDeviceRegistrationCommand> {
 
+    @NotBlank
     private final String deviceId;
     @NotNull
     @Valid
     private final DeviceRegistration deviceRegistration;
 
-    public UpdateDeviceRegistrationCommand(String deviceId, DeviceRegistration deviceRegistration) {
+    public UpdateDeviceRegistrationCommand(
+            String deviceId,
+            String deviceIdNew,
+            String deviceType,
+            String deviceUri,
+            Integer statusUpdatePeriod,
+            List<String> deviceTags) {
+        this.deviceRegistration = new DeviceRegistration(
+                deviceIdNew,
+                deviceType,
+                deviceUri,
+                statusUpdatePeriod,
+                deviceTags);
         this.deviceId = deviceId;
-        this.deviceRegistration = deviceRegistration;
         super.validateSelf();
     }
 

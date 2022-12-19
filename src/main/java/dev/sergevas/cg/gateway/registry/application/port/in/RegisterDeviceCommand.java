@@ -5,6 +5,7 @@ import dev.sergevas.cg.gateway.shared.SelfValidating;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -14,8 +15,18 @@ public class RegisterDeviceCommand extends SelfValidating<RegisterDeviceCommand>
     @Valid
     private final DeviceRegistration deviceRegistration;
 
-    public RegisterDeviceCommand(DeviceRegistration deviceRegistration) {
-        this.deviceRegistration = deviceRegistration;
+    public RegisterDeviceCommand(
+            String deviceId,
+            String deviceType,
+            String deviceUri,
+            Integer statusUpdatePeriod,
+            List<String> deviceTags) {
+        this.deviceRegistration = new DeviceRegistration(
+                deviceId,
+                deviceType,
+                deviceUri,
+                statusUpdatePeriod,
+                deviceTags);
         super.validateSelf();
     }
 

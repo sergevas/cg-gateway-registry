@@ -1,15 +1,13 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import jakarta.json.bind.annotation.JsonbProperty;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
 public class DeviceCurrentStateType {
 
-    private @Valid String deviceId = null;
-    private @Valid DeviceStateType deviceState = null;
+    private String deviceId = null;
+    private DeviceStateType deviceState = null;
 
     public DeviceCurrentStateType deviceId(String deviceId) {
         this.deviceId = deviceId;
@@ -17,7 +15,6 @@ public class DeviceCurrentStateType {
     }
 
     @JsonbProperty("deviceId")
-    @Size(max = 4)
     public String getDeviceId() {
         return deviceId;
     }

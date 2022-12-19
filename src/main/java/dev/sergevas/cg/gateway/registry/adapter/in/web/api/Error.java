@@ -1,16 +1,14 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import jakarta.json.bind.annotation.JsonbProperty;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
 public class Error {
 
-    private @Valid String errorCode = null;
+    private String errorCode = null;
 
-    private @Valid String errorMsg = null;
+    private String errorMsg = null;
 
     /**
      * Unique error code
@@ -21,7 +19,6 @@ public class Error {
     }
 
     @JsonbProperty("errorCode")
-    @Size(max=4)
     public String getErrorCode() {
         return errorCode;
     }

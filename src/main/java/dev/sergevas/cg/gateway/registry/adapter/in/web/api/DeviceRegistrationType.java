@@ -1,9 +1,6 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import jakarta.json.bind.annotation.JsonbProperty;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +8,11 @@ import java.util.Objects;
 
 public class DeviceRegistrationType {
 
-    private @Valid String deviceType = null;
-    private @Valid String deviceId = null;
-    private @Valid List<String> deviceTags = new ArrayList<String>();
-    private @Valid String deviceUri = null;
-    private @Valid Integer statusUpdatePeriod = null;
+    private String deviceType = null;
+    private String deviceId = null;
+    private List<String> deviceTags = new ArrayList<String>();
+    private String deviceUri = null;
+    private Integer statusUpdatePeriod = null;
 
     /**
      * Device type description
@@ -43,7 +40,6 @@ public class DeviceRegistrationType {
     }
 
     @JsonbProperty("deviceId")
-    @Size(max = 4)
     public String getDeviceId() {
         return deviceId;
     }
@@ -96,7 +92,6 @@ public class DeviceRegistrationType {
     }
 
     @JsonbProperty("statusUpdatePeriod")
-    @Min(0)
     public Integer getStatusUpdatePeriod() {
         return statusUpdatePeriod;
     }
