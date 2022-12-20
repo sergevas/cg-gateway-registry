@@ -6,6 +6,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class RegistrationApi {
     private UpdateDeviceRegistrationUseCase updateDeviceRegistrationUseCase;
     @Inject
     private DeleteReisteredDevicesUseCase deleteReisteredDevicesUseCase;
+    @Inject
+    UriInfo uriInfo;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -29,7 +32,7 @@ public class RegistrationApi {
         List<DeviceRegistration> deviceRegistrations = getRegisteredDeviceQuery.getDevice();
         List<DeviceRegistrationType> deviceRegistrationTypes = deviceRegistrations
                 .stream()
-                .map(toDeviceRegistrationTypeMapper::map)
+                .map(dr -> toDeviceRegistrationTypeMapper.map(dr, uriInfo))
                 .toList();
         return Response.ok().entity(deviceRegistrationTypes).build();
     }
@@ -39,7 +42,7 @@ public class RegistrationApi {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getRegisteredDeviceInfo(@PathParam("deviceId") String deviceId) {
         DeviceRegistrationType deviceRegistrationType = toDeviceRegistrationTypeMapper
-                .map(getRegisteredDeviceQuery.getDevice(new GetRegisteredDeviceCommand(deviceId)));
+                .map(getRegisteredDeviceQuery.getDevice(new GetRegisteredDeviceCommand(deviceId)), uriInfo);
         return Response.ok().entity(deviceRegistrationType).build();
     }
 
@@ -54,7 +57,7 @@ public class RegistrationApi {
                 deviceRegistrationType.getStatusUpdatePeriod(),
                 deviceRegistrationType.getDeviceTags());
         DeviceRegistrationType registered = toDeviceRegistrationTypeMapper
-                .map(registerDeviceUseCase.register(registerDeviceCommand));
+                .map(registerDeviceUseCase.register(registerDeviceCommand), uriInfo);
         return Response.ok().entity(registered).build();
     }
 
@@ -72,7 +75,7 @@ public class RegistrationApi {
                 deviceRegistrationType.getStatusUpdatePeriod(),
                 deviceRegistrationType.getDeviceTags());
         DeviceRegistrationType updated = toDeviceRegistrationTypeMapper
-                .map(updateDeviceRegistrationUseCase.updateDeviceRegistration(updateDeviceRegistrationCommand));
+                .map(updateDeviceRegistrationUseCase.updateDeviceRegistration(updateDeviceRegistrationCommand), uriInfo);
         return Response.ok().entity(updated).build();
     }
 
@@ -80,8 +83,7 @@ public class RegistrationApi {
     @Path("{deviceId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response deleteRegisteredDevice(@PathParam("deviceId") String deviceId) {
-        DeviceRegistrationType deviceRegistrationType = toDeviceRegistrationTypeMapper
-                .map(deleteReisteredDevicesUseCase.deleteRegisteredDevice(new DeleteRegisteredDeviceCommand(deviceId)));
-        return Response.ok().entity(deviceRegistrationType).build();
+        deleteReisteredDevicesUseCase.deleteRegisteredDevice(new DeleteRegisteredDeviceCommand(deviceId));
+        return Response.ok().build();
     }
 }

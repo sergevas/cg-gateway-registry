@@ -2,17 +2,17 @@ package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import jakarta.json.bind.annotation.JsonbProperty;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.net.URI;
+import java.util.*;
 
 public class DeviceRegistrationType {
 
     private String deviceType = null;
     private String deviceId = null;
-    private List<String> deviceTags = new ArrayList<String>();
     private String deviceUri = null;
     private Integer statusUpdatePeriod = null;
+    private List<String> deviceTags = new ArrayList<String>();
+    private Map<String, URI> links = new HashMap<>();
 
     /**
      * Device type description
@@ -100,6 +100,16 @@ public class DeviceRegistrationType {
         this.statusUpdatePeriod = statusUpdatePeriod;
     }
 
+    @JsonbProperty("_links")
+    public Map<String, URI> getLinks() {
+        return links;
+    }
+
+    public DeviceRegistrationType links(Map<String, URI> links) {
+        this.links = links;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -113,12 +123,13 @@ public class DeviceRegistrationType {
                 Objects.equals(deviceId, deviceRegistrationType.deviceId) &&
                 Objects.equals(deviceTags, deviceRegistrationType.deviceTags) &&
                 Objects.equals(deviceUri, deviceRegistrationType.deviceUri) &&
-                Objects.equals(statusUpdatePeriod, deviceRegistrationType.statusUpdatePeriod);
+                Objects.equals(statusUpdatePeriod, deviceRegistrationType.statusUpdatePeriod) &&
+                Objects.equals(links, deviceRegistrationType.links);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deviceType, deviceId, deviceTags, deviceUri, statusUpdatePeriod);
+        return Objects.hash(deviceType, deviceId, deviceTags, deviceUri, statusUpdatePeriod, links);
     }
 
     @Override
@@ -131,6 +142,7 @@ public class DeviceRegistrationType {
         sb.append("    deviceTags: ").append(toIndentedString(deviceTags)).append("\n");
         sb.append("    deviceUri: ").append(toIndentedString(deviceUri)).append("\n");
         sb.append("    statusUpdatePeriod: ").append(toIndentedString(statusUpdatePeriod)).append("\n");
+        sb.append("    links: ").append(toIndentedString(links)).append("\n");
         sb.append("}");
         return sb.toString();
     }
