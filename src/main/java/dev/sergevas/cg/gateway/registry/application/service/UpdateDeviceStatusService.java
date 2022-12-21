@@ -20,6 +20,6 @@ public class UpdateDeviceStatusService implements UpdateDeviceStatusUseCase {
     @Override
     public DeviceState updateDeviceStatus(UpdateDeviceStatusCommand updateDeviceStatusCommand) {
         return this.updateDeviceState.update(new DeviceState(updateDeviceStatusCommand.getDeviceId(),
-                updateDeviceStatusCommand.getDeviceStateType()));
+                updateDeviceStatusCommand.getStateType()));
     }
 }

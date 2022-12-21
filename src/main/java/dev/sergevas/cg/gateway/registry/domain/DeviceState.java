@@ -11,9 +11,9 @@ public class DeviceState {
     @NotBlank
     public String deviceId;
     @NotNull
-    public DeviceStateType stateType;
+    public StateType stateType;
 
-    public DeviceState(String deviceId, DeviceStateType stateType) {
+    public DeviceState(String deviceId, StateType stateType) {
         this.deviceId = deviceId;
         this.stateType = stateType;
     }
@@ -27,11 +27,11 @@ public class DeviceState {
         return this;
     }
 
-    public DeviceStateType getStateType() {
+    public StateType getStateType() {
         return stateType;
     }
 
-    public DeviceState setStateType(DeviceStateType stateType) {
+    public DeviceState setStateType(StateType stateType) {
         this.stateType = stateType;
         return this;
     }
