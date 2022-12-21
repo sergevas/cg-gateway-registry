@@ -4,11 +4,15 @@ import dev.sergevas.cg.gateway.registry.application.port.in.UpdateDeviceStatusCo
 import dev.sergevas.cg.gateway.registry.domain.StateType;
 import jakarta.enterprise.context.ApplicationScoped;
 
+import java.util.Optional;
+
 @ApplicationScoped
 class ToUpdateDeviceStatusCommandMapper {
 
     public UpdateDeviceStatusCommand map(String deviceId, DeviceStateType stateType) {
         return new UpdateDeviceStatusCommand(deviceId,
-                StateType.valueOf(stateType.toString()));
+                Optional.ofNullable(stateType)
+                        .map( st -> StateType.valueOf(st.toString()))
+                        .orElse(null));
     }
 }
