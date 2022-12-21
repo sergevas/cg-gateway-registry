@@ -11,7 +11,6 @@ import java.util.StringJoiner;
 
 public class RegisterDeviceCommand extends SelfValidating<RegisterDeviceCommand> {
 
-    @NotNull
     @Valid
     private final DeviceRegistration deviceRegistration;
 
