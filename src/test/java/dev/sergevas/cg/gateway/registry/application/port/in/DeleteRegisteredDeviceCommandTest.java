@@ -16,8 +16,7 @@ class DeleteRegisteredDeviceCommandTest {
 
     @Test
     void should_ThrowException_IfDeviceIdNull() {
-        ConstraintViolationException cve = assertThrows(ConstraintViolationException.class,
-                () -> new DeleteRegisteredDeviceCommand(null));
-        assertEquals("deviceId: must not be blank", cve.getMessage());
+        assertEquals("deviceId: must not be blank", assertThrows(ConstraintViolationException.class,
+                () -> new DeleteRegisteredDeviceCommand(null)).getMessage());
     }
 }

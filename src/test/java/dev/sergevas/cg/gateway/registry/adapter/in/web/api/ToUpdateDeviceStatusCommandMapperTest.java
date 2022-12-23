@@ -20,8 +20,9 @@ class ToUpdateDeviceStatusCommandMapperTest {
     @Test
     void should_ThrowException_IfInputInvalid() {
         ToUpdateDeviceStatusCommandMapper mapper = new ToUpdateDeviceStatusCommandMapper();
-        ConstraintViolationException cve = assertThrows(ConstraintViolationException.class,
-                () -> mapper.map("", null));
-        assertEquals("deviceId: must not be blank, stateType: must not be null", cve.getMessage());
+        assertEquals("deviceId: must not be blank", assertThrows(ConstraintViolationException.class,
+                () -> mapper.map("", DeviceStateType.ACTIVE)).getMessage());
+        assertEquals("stateType: must not be null", assertThrows(ConstraintViolationException.class,
+                () -> mapper.map("0001", null)).getMessage());
     }
 }

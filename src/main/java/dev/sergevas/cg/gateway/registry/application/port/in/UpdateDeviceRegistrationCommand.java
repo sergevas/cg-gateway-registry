@@ -15,7 +15,6 @@ public class UpdateDeviceRegistrationCommand extends SelfValidating<UpdateDevice
     @NotBlank
     private final String deviceId;
     @NotNull
-    @Valid
     private final DeviceRegistration deviceRegistration;
 
     public UpdateDeviceRegistrationCommand(

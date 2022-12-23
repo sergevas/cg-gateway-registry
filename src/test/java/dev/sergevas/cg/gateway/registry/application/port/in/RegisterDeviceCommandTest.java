@@ -30,9 +30,40 @@ class RegisterDeviceCommandTest {
 
     @Test
     void should_ThrowException_IfDeviceRegistrationNull() {
-        ConstraintViolationException cve = assertThrows(ConstraintViolationException.class,
-                () -> new RegisterDeviceCommand(null, null,
-                        null, null, null));
-        assertEquals("deviceRegistration.deviceId: must not be blank, deviceRegistration.deviceUri: must not be blank, deviceRegistration.deviceType: must not be blank", cve.getMessage());
+        assertEquals("deviceRegistration.deviceId: must not be blank",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new RegisterDeviceCommand(null,
+                                "switch",
+                                "http://localhost:9080/gateway/registry/devices/0001",
+                                10000,
+                                List.of("ESP8266"))).getMessage());
+        assertEquals("deviceRegistration.deviceType: must not be blank",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new RegisterDeviceCommand("0001",
+                                null,
+                                "http://localhost:9080/gateway/registry/devices/0001",
+                                10000,
+                                List.of("ESP8266"))).getMessage());
+        assertEquals("deviceRegistration.deviceUri: must not be blank",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new RegisterDeviceCommand("0001",
+                                "switch",
+                                null,
+                                10000,
+                                List.of("ESP8266"))).getMessage());
+        assertEquals("deviceRegistration.statusUpdatePeriod: must not be null",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new RegisterDeviceCommand("0001",
+                                "switch",
+                                "http://localhost:9080/gateway/registry/devices/0001",
+                                null,
+                                List.of("ESP8266"))).getMessage());
+        assertEquals("deviceRegistration.statusUpdatePeriod: must be greater than or equal to 0",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new RegisterDeviceCommand("0001",
+                                "switch",
+                                "http://localhost:9080/gateway/registry/devices/0001",
+                                -10,
+                                List.of("ESP8266"))).getMessage());
     }
 }

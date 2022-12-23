@@ -1,6 +1,7 @@
 package dev.sergevas.cg.gateway.registry.domain;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class DeviceRegistration {
     private String deviceType;
     @NotBlank
     private String deviceUri;
+    @NotNull
     @PositiveOrZero
     private Integer statusUpdatePeriod;
     private List<String> deviceTags;
