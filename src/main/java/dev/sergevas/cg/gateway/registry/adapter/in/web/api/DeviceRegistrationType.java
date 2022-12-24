@@ -1,18 +1,18 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
+import dev.sergevas.cg.gateway.shared.adapter.in.web.HalType;
 import jakarta.json.bind.annotation.JsonbProperty;
 
 import java.net.URI;
 import java.util.*;
 
-public class DeviceRegistrationType {
+public class DeviceRegistrationType extends HalType {
 
     private String deviceType = null;
     private String deviceId = null;
     private String deviceUri = null;
     private Integer statusUpdatePeriod = null;
     private List<String> deviceTags = new ArrayList<String>();
-    private Map<String, URI> links = new HashMap<>();
 
     /**
      * Device type description
@@ -100,51 +100,33 @@ public class DeviceRegistrationType {
         this.statusUpdatePeriod = statusUpdatePeriod;
     }
 
-    @JsonbProperty("_links")
-    public Map<String, URI> getLinks() {
-        return links;
-    }
-
-    public DeviceRegistrationType links(Map<String, URI> links) {
-        this.links = links;
-        return this;
-    }
-
     @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        DeviceRegistrationType deviceRegistrationType = (DeviceRegistrationType) o;
-        return Objects.equals(deviceType, deviceRegistrationType.deviceType) &&
-                Objects.equals(deviceId, deviceRegistrationType.deviceId) &&
-                Objects.equals(deviceTags, deviceRegistrationType.deviceTags) &&
-                Objects.equals(deviceUri, deviceRegistrationType.deviceUri) &&
-                Objects.equals(statusUpdatePeriod, deviceRegistrationType.statusUpdatePeriod) &&
-                Objects.equals(links, deviceRegistrationType.links);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DeviceRegistrationType that = (DeviceRegistrationType) o;
+        return Objects.equals(deviceType, that.deviceType)
+                && Objects.equals(deviceId, that.deviceId)
+                && Objects.equals(deviceUri, that.deviceUri)
+                && Objects.equals(statusUpdatePeriod, that.statusUpdatePeriod)
+                && Objects.equals(deviceTags, that.deviceTags);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deviceType, deviceId, deviceTags, deviceUri, statusUpdatePeriod, links);
+        return Objects.hash(super.hashCode(), deviceType, deviceId, deviceUri, statusUpdatePeriod, deviceTags);
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("class DeviceRegistrationType {\n");
-
-        sb.append("    deviceType: ").append(toIndentedString(deviceType)).append("\n");
-        sb.append("    deviceId: ").append(toIndentedString(deviceId)).append("\n");
-        sb.append("    deviceTags: ").append(toIndentedString(deviceTags)).append("\n");
-        sb.append("    deviceUri: ").append(toIndentedString(deviceUri)).append("\n");
-        sb.append("    statusUpdatePeriod: ").append(toIndentedString(statusUpdatePeriod)).append("\n");
-        sb.append("    links: ").append(toIndentedString(links)).append("\n");
-        sb.append("}");
-        return sb.toString();
+        return new StringJoiner(", ", DeviceRegistrationType.class.getSimpleName() + "[", "]")
+                .add("deviceType='" + deviceType + "'")
+                .add("deviceId='" + deviceId + "'")
+                .add("deviceUri='" + deviceUri + "'")
+                .add("statusUpdatePeriod=" + statusUpdatePeriod)
+                .add("deviceTags=" + deviceTags)
+                .toString();
     }
 
     /**

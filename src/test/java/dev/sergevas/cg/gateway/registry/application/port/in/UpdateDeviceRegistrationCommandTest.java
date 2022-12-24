@@ -33,17 +33,53 @@ class UpdateDeviceRegistrationCommandTest {
 
     @Test
     void should_ThrowException_IfInputInvalid() {
-        ConstraintViolationException cve = assertThrows(ConstraintViolationException.class,
-                () -> new UpdateDeviceRegistrationCommand(null, null, null,
-                        null, null, null));
-        assertTrue(cve
-                .getConstraintViolations()
-                .stream()
-                .map(ConstraintViolation::getMessage)
-                .toList()
-                .containsAll(Set.of("deviceId: must not be blank",
-                        "deviceRegistration.deviceUri: must not be blank",
-                        "deviceRegistration.deviceId: must not be blank",
-                        "deviceRegistration.deviceType: must not be blank")));
+
+        assertEquals("deviceId: must not be blank",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new UpdateDeviceRegistrationCommand(null, "0002",
+                                "switch",
+                                "http://localhost:9080/gateway/registry/devices/0001",
+                                10000,
+                                List.of("ESP8266"))).getMessage());
+
+        assertEquals("deviceRegistration.deviceId: must not be blank",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new UpdateDeviceRegistrationCommand("0001", null,
+                                "switch",
+                                "http://localhost:9080/gateway/registry/devices/0001",
+                                10000,
+                                List.of("ESP8266"))).getMessage());
+
+        assertEquals("deviceRegistration.deviceType: must not be blank",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new UpdateDeviceRegistrationCommand("0001", "0002",
+                                null,
+                                "http://localhost:9080/gateway/registry/devices/0001",
+                                10000,
+                                List.of("ESP8266"))).getMessage());
+
+        assertEquals("deviceRegistration.deviceUri: must not be blank",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new UpdateDeviceRegistrationCommand("0001", "0002",
+                                "switch",
+                                null,
+                                10000,
+                                List.of("ESP8266"))).getMessage());
+
+        assertEquals("deviceRegistration.statusUpdatePeriod: must not be null",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new UpdateDeviceRegistrationCommand("0001", "0002",
+                                "switch",
+                                "http://localhost:9080/gateway/registry/devices/0001",
+                                null,
+                                List.of("ESP8266"))).getMessage());
+
+        assertEquals("deviceRegistration.statusUpdatePeriod: must be greater than or equal to 0",
+                assertThrows(ConstraintViolationException.class,
+                        () -> new UpdateDeviceRegistrationCommand("0001", "0002",
+                                "switch",
+                                "http://localhost:9080/gateway/registry/devices/0001",
+                                -1,
+                                List.of("ESP8266"))).getMessage());
     }
 }

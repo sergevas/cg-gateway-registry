@@ -43,8 +43,7 @@ class RegisterDeviceCommandTest {
                                 null,
                                 "http://localhost:9080/gateway/registry/devices/0001",
                                 10000,
-                                List.of("ESP8266"))).getMessage());
-        assertEquals("deviceRegistration.deviceUri: must not be blank",
+                                List.of("ESP8266"))).getMessage());        assertEquals("deviceRegistration.deviceUri: must not be blank",
                 assertThrows(ConstraintViolationException.class,
                         () -> new RegisterDeviceCommand("0001",
                                 "switch",
