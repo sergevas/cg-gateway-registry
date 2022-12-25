@@ -1,7 +1,5 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
-import jakarta.json.bind.annotation.JsonbProperty;
-
 import java.util.Objects;
 
 public class Error {
@@ -18,7 +16,6 @@ public class Error {
         return this;
     }
 
-    @JsonbProperty("errorCode")
     public String getErrorCode() {
         return errorCode;
     }
@@ -35,7 +32,6 @@ public class Error {
         return this;
     }
 
-    @JsonbProperty("errorMsg")
     public String getErrorMsg() {
         return errorMsg;
     }

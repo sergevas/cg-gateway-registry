@@ -1,7 +1,5 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
-import jakarta.json.bind.annotation.JsonbProperty;
-
 import java.util.Objects;
 
 public class DeviceCurrentStateType {
@@ -14,7 +12,6 @@ public class DeviceCurrentStateType {
         return this;
     }
 
-    @JsonbProperty("deviceId")
     public String getDeviceId() {
         return deviceId;
     }
@@ -28,7 +25,6 @@ public class DeviceCurrentStateType {
         return this;
     }
 
-    @JsonbProperty("deviceState")
     public DeviceStateType getDeviceState() {
         return deviceState;
     }

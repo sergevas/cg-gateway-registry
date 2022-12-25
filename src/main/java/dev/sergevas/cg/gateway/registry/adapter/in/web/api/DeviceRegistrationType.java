@@ -6,13 +6,23 @@ import jakarta.json.bind.annotation.JsonbProperty;
 import java.net.URI;
 import java.util.*;
 
-public class DeviceRegistrationType extends HalType {
+public class DeviceRegistrationType {
 
     private String deviceType = null;
     private String deviceId = null;
     private String deviceUri = null;
     private Integer statusUpdatePeriod = null;
     private List<String> deviceTags = new ArrayList<String>();
+    @JsonbProperty("_links")
+    Map<String, URI> links = new HashMap<>();
+    public DeviceRegistrationType links(Map<String, URI> links) {
+        this.links = links;
+        return this;
+    }
+
+    public Map<String, URI> getLinks() {
+        return links;
+    }
 
     /**
      * Device type description
@@ -22,7 +32,6 @@ public class DeviceRegistrationType extends HalType {
         return this;
     }
 
-    @JsonbProperty("deviceType")
     public String getDeviceType() {
         return deviceType;
     }
@@ -39,7 +48,6 @@ public class DeviceRegistrationType extends HalType {
         return this;
     }
 
-    @JsonbProperty("deviceId")
     public String getDeviceId() {
         return deviceId;
     }
@@ -56,7 +64,6 @@ public class DeviceRegistrationType extends HalType {
         return this;
     }
 
-    @JsonbProperty("deviceTags")
     public List<String> getDeviceTags() {
         return deviceTags;
     }
@@ -73,7 +80,6 @@ public class DeviceRegistrationType extends HalType {
         return this;
     }
 
-    @JsonbProperty("deviceUri")
     public String getDeviceUri() {
         return deviceUri;
     }
@@ -91,7 +97,6 @@ public class DeviceRegistrationType extends HalType {
         return this;
     }
 
-    @JsonbProperty("statusUpdatePeriod")
     public Integer getStatusUpdatePeriod() {
         return statusUpdatePeriod;
     }
@@ -104,18 +109,18 @@ public class DeviceRegistrationType extends HalType {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         DeviceRegistrationType that = (DeviceRegistrationType) o;
         return Objects.equals(deviceType, that.deviceType)
                 && Objects.equals(deviceId, that.deviceId)
                 && Objects.equals(deviceUri, that.deviceUri)
                 && Objects.equals(statusUpdatePeriod, that.statusUpdatePeriod)
-                && Objects.equals(deviceTags, that.deviceTags);
+                && Objects.equals(deviceTags, that.deviceTags)
+                && Objects.equals(links, that.links);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), deviceType, deviceId, deviceUri, statusUpdatePeriod, deviceTags);
+        return Objects.hash(deviceType, deviceId, deviceUri, statusUpdatePeriod, deviceTags, links);
     }
 
     @Override
@@ -126,6 +131,7 @@ public class DeviceRegistrationType extends HalType {
                 .add("deviceUri='" + deviceUri + "'")
                 .add("statusUpdatePeriod=" + statusUpdatePeriod)
                 .add("deviceTags=" + deviceTags)
+                .add("links=" + links)
                 .toString();
     }
 

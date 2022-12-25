@@ -24,7 +24,7 @@ class ToDeviceRegistrationTypeMapper {
                 .statusUpdatePeriod(deviceRegistration.getStatusUpdatePeriod());
         deviceRegistrationType.getDeviceTags().addAll(deviceRegistration.getDeviceTags());
 
-        halBuilder.apendSelf(deviceRegistrationType, uriInfo.getBaseUriBuilder()
+        halBuilder.appendSelf(deviceRegistrationType.getLinks(), uriInfo.getBaseUriBuilder()
                 .path(RegistrationApi.class)
                 .path(deviceRegistration.getDeviceId())
                 .build());
