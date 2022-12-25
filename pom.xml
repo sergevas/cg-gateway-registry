@@ -101,7 +101,7 @@
                     <runtimeArtifact>
                         <groupId>io.openliberty.beta</groupId>
                         <artifactId>openliberty-runtime</artifactId>
-                        <version>22.0.0.13-beta</version>
+                        <version>23.0.0.1-beta</version>
                         <type>zip</type>
                     </runtimeArtifact>
                     <include>minify,runnable</include>

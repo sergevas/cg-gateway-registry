@@ -9,12 +9,12 @@ import jakarta.ws.rs.core.UriInfo;
 @ApplicationScoped
 class ToDeviceRegistrationTypeMapper {
 
-    private HalBuilder halBuilder;
-
-    @Inject
-    public ToDeviceRegistrationTypeMapper(HalBuilder halBuilder) {
+    public void setHalBuilder(HalBuilder halBuilder) {
         this.halBuilder = halBuilder;
     }
+
+    @Inject
+    private HalBuilder halBuilder;
 
     DeviceRegistrationType map(DeviceRegistration deviceRegistration, UriInfo uriInfo) {
         DeviceRegistrationType deviceRegistrationType = new DeviceRegistrationType()

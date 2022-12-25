@@ -46,7 +46,8 @@ class ToDeviceRegistrationTypeMapperTest {
                 .statusUpdatePeriod(10000)
                 .deviceTags(List.of("ESP8266", "SRD-05VDC-SL-C"))
                 .links(Map.of("self", URI.create("http://localhost:9080/gateway/registry/devices/0001")));
-        ToDeviceRegistrationTypeMapper mapper = new ToDeviceRegistrationTypeMapper(new HalBuilder());
+        ToDeviceRegistrationTypeMapper mapper = new ToDeviceRegistrationTypeMapper();
+        mapper.setHalBuilder(new HalBuilder());
         assertEquals(expected, mapper.map(deviceRegistration, uriInfo));
 
     }
