@@ -3,7 +3,6 @@ package dev.sergevas.cg.gateway.registry.application.port.in;
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import dev.sergevas.cg.gateway.shared.SelfValidating;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 import java.util.Objects;

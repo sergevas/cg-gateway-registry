@@ -10,6 +10,8 @@ import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Optional;
 
 @ApplicationScoped
@@ -40,6 +42,8 @@ public class UpdateDeviceRegistrationService implements UpdateDeviceRegistration
                         deviceRegistration.getDeviceType(),
                         deviceRegistration.getDeviceUri(),
                         deviceRegistration.getStatusUpdatePeriod(),
+                        deviceRegistration.getCreated(),
+                        OffsetDateTime.now(ZoneOffset.UTC),
                         deviceRegistration.getDeviceTags()));
     }
 }

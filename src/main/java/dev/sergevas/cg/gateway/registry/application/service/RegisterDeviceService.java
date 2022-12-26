@@ -9,6 +9,9 @@ import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
 @ApplicationScoped
 public class RegisterDeviceService implements RegisterDeviceUseCase {
 
@@ -22,6 +25,8 @@ public class RegisterDeviceService implements RegisterDeviceUseCase {
         if (loadDeviceRegistration.load(registerDeviceCommand.getDeviceRegistration().getDeviceId()) != null) {
             throw new DeviceAlreadyRegisteredException(registerDeviceCommand.getDeviceRegistration().getDeviceId());
         }
+        DeviceRegistration deviceRegistration = registerDeviceCommand.getDeviceRegistration();
+        deviceRegistration.setCreated(OffsetDateTime.now(ZoneOffset.UTC));
         return saveDeviceRegistration.save(registerDeviceCommand.getDeviceRegistration());
     }
 }

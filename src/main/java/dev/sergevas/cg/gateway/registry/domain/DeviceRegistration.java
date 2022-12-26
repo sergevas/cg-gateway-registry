@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -19,6 +20,8 @@ public class DeviceRegistration {
     @NotNull
     @PositiveOrZero
     private Integer statusUpdatePeriod;
+    private OffsetDateTime created;
+    private OffsetDateTime lastUpdated;
     private List<String> deviceTags;
 
     public DeviceRegistration(
@@ -26,12 +29,25 @@ public class DeviceRegistration {
             String deviceType,
             String deviceUri,
             Integer statusUpdatePeriod,
+            OffsetDateTime created,
+            OffsetDateTime lastUpdated,
             List<String> deviceTags) {
         this.deviceId = deviceId;
         this.deviceType = deviceType;
         this.deviceUri = deviceUri;
         this.statusUpdatePeriod = statusUpdatePeriod;
+        this.created = created;
+        this.lastUpdated = lastUpdated;
         this.deviceTags = deviceTags;
+    }
+
+    public DeviceRegistration(
+            String deviceId,
+            String deviceType,
+            String deviceUri,
+            Integer statusUpdatePeriod,
+            List<String> deviceTags) {
+        this(deviceId, deviceType, deviceUri, statusUpdatePeriod, null, null, deviceTags);
     }
 
     public String getDeviceId() {
@@ -66,6 +82,22 @@ public class DeviceRegistration {
         this.statusUpdatePeriod = statusUpdatePeriod;
     }
 
+    public OffsetDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(OffsetDateTime created) {
+        this.created = created;
+    }
+
+    public OffsetDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(OffsetDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
     public List<String> getDeviceTags() {
         return deviceTags;
     }
@@ -79,16 +111,12 @@ public class DeviceRegistration {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeviceRegistration that = (DeviceRegistration) o;
-        return Objects.equals(deviceId, that.deviceId)
-                && Objects.equals(deviceType, that.deviceType)
-                && Objects.equals(deviceUri, that.deviceUri)
-                && Objects.equals(statusUpdatePeriod, that.statusUpdatePeriod)
-                && Objects.equals(deviceTags, that.deviceTags);
+        return Objects.equals(deviceId, that.deviceId) && Objects.equals(deviceType, that.deviceType) && Objects.equals(deviceUri, that.deviceUri) && Objects.equals(statusUpdatePeriod, that.statusUpdatePeriod) && Objects.equals(created, that.created) && Objects.equals(lastUpdated, that.lastUpdated) && Objects.equals(deviceTags, that.deviceTags);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deviceId, deviceType, deviceUri, statusUpdatePeriod, deviceTags);
+        return Objects.hash(deviceId, deviceType, deviceUri, statusUpdatePeriod, created, lastUpdated, deviceTags);
     }
 
     @Override
@@ -98,6 +126,8 @@ public class DeviceRegistration {
                 .add("deviceType='" + deviceType + "'")
                 .add("deviceUri='" + deviceUri + "'")
                 .add("statusUpdatePeriod=" + statusUpdatePeriod)
+                .add("created=" + created)
+                .add("lastUpdated=" + lastUpdated)
                 .add("deviceTags=" + deviceTags)
                 .toString();
     }

@@ -1,20 +1,53 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
-import dev.sergevas.cg.gateway.shared.adapter.in.web.HalType;
+import dev.sergevas.cg.gateway.shared.adapter.in.web.HalEmbeddedType;
 import jakarta.json.bind.annotation.JsonbProperty;
 
 import java.net.URI;
+import java.time.OffsetDateTime;
 import java.util.*;
 
 public class DeviceRegistrationType {
 
-    private String deviceType = null;
-    private String deviceId = null;
-    private String deviceUri = null;
-    private Integer statusUpdatePeriod = null;
-    private List<String> deviceTags = new ArrayList<String>();
     @JsonbProperty("_links")
     Map<String, URI> links = new HashMap<>();
+    private String deviceType;
+    private String deviceId;
+    private String deviceUri;
+    private Integer statusUpdatePeriod;
+    private OffsetDateTime created;
+    private OffsetDateTime lastUpdated;
+    private List<String> deviceTags = new ArrayList<String>();
+    @JsonbProperty("_embedded")
+    private HalEmbeddedType halEmbeddedType;
+
+    public OffsetDateTime getCreated() {
+        return created;
+    }
+
+    public DeviceRegistrationType created(OffsetDateTime created) {
+        this.created = created;
+        return this;
+    }
+
+    public OffsetDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public DeviceRegistrationType lastUpdated(OffsetDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
+        return this;
+    }
+
+    public HalEmbeddedType getHalEmbeddedType() {
+        return halEmbeddedType;
+    }
+
+    public DeviceRegistrationType halEmbeddedType(HalEmbeddedType halEmbeddedType) {
+        this.halEmbeddedType = halEmbeddedType;
+        return this;
+    }
+
     public DeviceRegistrationType links(Map<String, URI> links) {
         this.links = links;
         return this;
@@ -114,35 +147,15 @@ public class DeviceRegistrationType {
                 && Objects.equals(deviceId, that.deviceId)
                 && Objects.equals(deviceUri, that.deviceUri)
                 && Objects.equals(statusUpdatePeriod, that.statusUpdatePeriod)
+                && Objects.equals(created, that.created)
+                && Objects.equals(lastUpdated, that.lastUpdated)
                 && Objects.equals(deviceTags, that.deviceTags)
-                && Objects.equals(links, that.links);
+                && Objects.equals(links, that.links)
+                && Objects.equals(halEmbeddedType, that.halEmbeddedType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deviceType, deviceId, deviceUri, statusUpdatePeriod, deviceTags, links);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", DeviceRegistrationType.class.getSimpleName() + "[", "]")
-                .add("deviceType='" + deviceType + "'")
-                .add("deviceId='" + deviceId + "'")
-                .add("deviceUri='" + deviceUri + "'")
-                .add("statusUpdatePeriod=" + statusUpdatePeriod)
-                .add("deviceTags=" + deviceTags)
-                .add("links=" + links)
-                .toString();
-    }
-
-    /**
-     * Convert the given object to string with each line indented by 4 spaces
-     * (except the first line).
-     */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
+        return Objects.hash(deviceType, deviceId, deviceUri, statusUpdatePeriod, created, lastUpdated, deviceTags, links, halEmbeddedType);
     }
 }

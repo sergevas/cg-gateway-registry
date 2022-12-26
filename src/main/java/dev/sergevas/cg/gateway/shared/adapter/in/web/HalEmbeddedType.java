@@ -8,14 +8,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public abstract class HalType {
+public abstract class HalEmbeddedType {
 
+    @JsonbProperty("_links")
     private Map<String, URI> links = new HashMap<>();
 
-    @SuppressWarnings("unchecked")
-    public <T extends HalType> T links(Map<String, URI> links) {
+    public HalEmbeddedType links(Map<String, URI> links) {
         this.links = links;
-        return (T) this;
+        return this;
     }
 
     @JsonbProperty("_links")
@@ -28,8 +28,8 @@ public abstract class HalType {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HalType halType = (HalType) o;
-        return Objects.equals(links, halType.links);
+        HalEmbeddedType that = (HalEmbeddedType) o;
+        return Objects.equals(links, that.links);
     }
 
     @Override
@@ -39,7 +39,7 @@ public abstract class HalType {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", HalType.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", HalEmbeddedType.class.getSimpleName() + "[", "]")
                 .add("links=" + links)
                 .toString();
     }

@@ -1,11 +1,13 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 public class DeviceCurrentStateType {
 
-    private String deviceId = null;
-    private DeviceStateType deviceState = null;
+    private String deviceId;
+    private DeviceStateType deviceState;
+    private OffsetDateTime lastUpdated;
 
     public DeviceCurrentStateType deviceId(String deviceId) {
         this.deviceId = deviceId;
@@ -33,6 +35,15 @@ public class DeviceCurrentStateType {
         this.deviceState = deviceState;
     }
 
+    public OffsetDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public DeviceCurrentStateType lastUpdated(OffsetDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -42,13 +53,14 @@ public class DeviceCurrentStateType {
             return false;
         }
         DeviceCurrentStateType deviceCurrentStateType = (DeviceCurrentStateType) o;
-        return Objects.equals(deviceId, deviceCurrentStateType.deviceId) &&
-                Objects.equals(deviceState, deviceCurrentStateType.deviceState);
+        return Objects.equals(deviceId, deviceCurrentStateType.deviceId)
+                && Objects.equals(deviceState, deviceCurrentStateType.deviceState)
+                && Objects.equals(lastUpdated, deviceCurrentStateType.lastUpdated);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deviceId, deviceState);
+        return Objects.hash(deviceId, deviceState, lastUpdated);
     }
 
     @Override
@@ -58,6 +70,7 @@ public class DeviceCurrentStateType {
 
         sb.append("    deviceId: ").append(toIndentedString(deviceId)).append("\n");
         sb.append("    deviceState: ").append(toIndentedString(deviceState)).append("\n");
+        sb.append("    lastUpdated: ").append(toIndentedString(lastUpdated)).append("\n");
         sb.append("}");
         return sb.toString();
     }

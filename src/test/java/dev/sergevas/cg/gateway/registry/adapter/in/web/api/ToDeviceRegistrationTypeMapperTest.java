@@ -8,6 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
 
@@ -32,11 +36,21 @@ class ToDeviceRegistrationTypeMapperTest {
 
     @Test
     void should_ReturnExpectedDeviceRegistrationType_IfInputOk() {
+        OffsetDateTime created = OffsetDateTime
+                .of(LocalDateTime
+                        .of(2022, Month.OCTOBER, 20, 1, 27, 0), ZoneOffset.UTC);
+
+        OffsetDateTime lastUpdated = OffsetDateTime
+                .of(LocalDateTime
+                        .of(2022, Month.DECEMBER, 27, 1, 27, 0), ZoneOffset.UTC);
+
         DeviceRegistration deviceRegistration = new DeviceRegistration(
                 "0001",
                 "switch",
                 "http://192.168.1.84/cg/actuator/switch/0001",
                 10000,
+                created,
+                lastUpdated,
                 List.of("ESP8266", "SRD-05VDC-SL-C")
         );
         DeviceRegistrationType expected = new DeviceRegistrationType()
@@ -44,6 +58,8 @@ class ToDeviceRegistrationTypeMapperTest {
                 .deviceType("switch")
                 .deviceUri("http://192.168.1.84/cg/actuator/switch/0001")
                 .statusUpdatePeriod(10000)
+                .created(created)
+                .lastUpdated(lastUpdated)
                 .deviceTags(List.of("ESP8266", "SRD-05VDC-SL-C"))
                 .links(Map.of("self", URI.create("http://localhost:9080/gateway/registry/devices/0001")));
         ToDeviceRegistrationTypeMapper mapper = new ToDeviceRegistrationTypeMapper();

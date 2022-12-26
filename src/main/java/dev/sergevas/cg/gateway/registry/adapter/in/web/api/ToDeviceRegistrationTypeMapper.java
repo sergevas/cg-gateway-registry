@@ -9,19 +9,21 @@ import jakarta.ws.rs.core.UriInfo;
 @ApplicationScoped
 class ToDeviceRegistrationTypeMapper {
 
+    @Inject
+    private HalBuilder halBuilder;
+
     public void setHalBuilder(HalBuilder halBuilder) {
         this.halBuilder = halBuilder;
     }
-
-    @Inject
-    private HalBuilder halBuilder;
 
     DeviceRegistrationType map(DeviceRegistration deviceRegistration, UriInfo uriInfo) {
         DeviceRegistrationType deviceRegistrationType = new DeviceRegistrationType()
                 .deviceId(deviceRegistration.getDeviceId())
                 .deviceType(deviceRegistration.getDeviceType())
                 .deviceUri(deviceRegistration.getDeviceUri())
-                .statusUpdatePeriod(deviceRegistration.getStatusUpdatePeriod());
+                .statusUpdatePeriod(deviceRegistration.getStatusUpdatePeriod())
+                .created(deviceRegistration.getCreated())
+                .lastUpdated(deviceRegistration.getLastUpdated());
         deviceRegistrationType.getDeviceTags().addAll(deviceRegistration.getDeviceTags());
 
         halBuilder.appendSelf(deviceRegistrationType.getLinks(), uriInfo.getBaseUriBuilder()
