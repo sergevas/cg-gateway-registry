@@ -6,7 +6,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 class ToDeviceCurrentStateTypeMapper {
 
-    DeviceStateType map(DeviceState deviceState) {
-        return DeviceStateType.fromValue(deviceState.getStateType().getType());
+    DeviceCurrentStateType map(DeviceState deviceState) {
+        return new DeviceCurrentStateType()
+                .deviceState(DeviceStateType.fromValue(deviceState.getStateType().getType()))
+                .deviceId(deviceState.getDeviceId())
+                .lastUpdated(deviceState.getLastUpdated());
     }
 }

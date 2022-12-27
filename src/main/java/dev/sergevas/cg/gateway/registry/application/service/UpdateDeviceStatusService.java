@@ -7,6 +7,9 @@ import dev.sergevas.cg.gateway.registry.domain.DeviceState;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
 @ApplicationScoped
 public class UpdateDeviceStatusService implements UpdateDeviceStatusUseCase {
 
@@ -19,7 +22,9 @@ public class UpdateDeviceStatusService implements UpdateDeviceStatusUseCase {
 
     @Override
     public DeviceState updateDeviceStatus(UpdateDeviceStatusCommand updateDeviceStatusCommand) {
-        return this.updateDeviceState.update(new DeviceState(updateDeviceStatusCommand.getDeviceId(),
-                updateDeviceStatusCommand.getStateType()));
+        DeviceState deviceState = new DeviceState(updateDeviceStatusCommand.getDeviceId(),
+                updateDeviceStatusCommand.getStateType(),
+                OffsetDateTime.now(ZoneOffset.UTC));
+        return this.updateDeviceState.update(deviceState);
     }
 }
