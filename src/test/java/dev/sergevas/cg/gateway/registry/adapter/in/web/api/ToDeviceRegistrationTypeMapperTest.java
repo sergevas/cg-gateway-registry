@@ -1,7 +1,7 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
-import dev.sergevas.cg.gateway.shared.adapter.in.web.HalBuilder;
+import dev.sergevas.cg.gateway.shared.adapter.in.web.hal.HalBuilder;
 import jakarta.ws.rs.core.UriBuilder;
 import jakarta.ws.rs.core.UriInfo;
 import org.junit.jupiter.api.BeforeEach;

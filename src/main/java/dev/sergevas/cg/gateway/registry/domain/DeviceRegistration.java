@@ -24,6 +24,8 @@ public class DeviceRegistration {
     private OffsetDateTime lastUpdated;
     private List<String> deviceTags;
 
+    private DeviceState deviceState;
+
     public DeviceRegistration(
             String deviceId,
             String deviceType,
@@ -31,6 +33,7 @@ public class DeviceRegistration {
             Integer statusUpdatePeriod,
             OffsetDateTime created,
             OffsetDateTime lastUpdated,
+            DeviceState deviceState,
             List<String> deviceTags) {
         this.deviceId = deviceId;
         this.deviceType = deviceType;
@@ -38,6 +41,7 @@ public class DeviceRegistration {
         this.statusUpdatePeriod = statusUpdatePeriod;
         this.created = created;
         this.lastUpdated = lastUpdated;
+        this.deviceState = deviceState;
         this.deviceTags = deviceTags;
     }
 
@@ -46,8 +50,19 @@ public class DeviceRegistration {
             String deviceType,
             String deviceUri,
             Integer statusUpdatePeriod,
+            OffsetDateTime created,
+            OffsetDateTime lastUpdated,
             List<String> deviceTags) {
-        this(deviceId, deviceType, deviceUri, statusUpdatePeriod, null, null, deviceTags);
+        this(deviceId, deviceType, deviceUri, statusUpdatePeriod, created, lastUpdated, null, deviceTags);
+    }
+
+    public DeviceRegistration(
+            String deviceId,
+            String deviceType,
+            String deviceUri,
+            Integer statusUpdatePeriod,
+            List<String> deviceTags) {
+        this(deviceId, deviceType, deviceUri, statusUpdatePeriod, null, null, null, deviceTags);
     }
 
     public String getDeviceId() {
@@ -98,6 +113,14 @@ public class DeviceRegistration {
         this.lastUpdated = lastUpdated;
     }
 
+    public DeviceState getDeviceState() {
+        return deviceState;
+    }
+
+    public void setDeviceState(DeviceState deviceState) {
+        this.deviceState = deviceState;
+    }
+
     public List<String> getDeviceTags() {
         return deviceTags;
     }
@@ -111,12 +134,15 @@ public class DeviceRegistration {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeviceRegistration that = (DeviceRegistration) o;
-        return Objects.equals(deviceId, that.deviceId) && Objects.equals(deviceType, that.deviceType) && Objects.equals(deviceUri, that.deviceUri) && Objects.equals(statusUpdatePeriod, that.statusUpdatePeriod) && Objects.equals(created, that.created) && Objects.equals(lastUpdated, that.lastUpdated) && Objects.equals(deviceTags, that.deviceTags);
+        return Objects.equals(deviceId, that.deviceId) && Objects.equals(deviceType, that.deviceType)
+                && Objects.equals(deviceUri, that.deviceUri) && Objects.equals(statusUpdatePeriod, that.statusUpdatePeriod)
+                && Objects.equals(created, that.created) && Objects.equals(lastUpdated, that.lastUpdated)
+                && Objects.equals(deviceTags, that.deviceTags) && Objects.equals(deviceState, that.deviceState);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deviceId, deviceType, deviceUri, statusUpdatePeriod, created, lastUpdated, deviceTags);
+        return Objects.hash(deviceId, deviceType, deviceUri, statusUpdatePeriod, created, lastUpdated, deviceTags, deviceState);
     }
 
     @Override
@@ -125,9 +151,10 @@ public class DeviceRegistration {
                 .add("deviceId='" + deviceId + "'")
                 .add("deviceType='" + deviceType + "'")
                 .add("deviceUri='" + deviceUri + "'")
-                .add("statusUpdatePeriod=" + statusUpdatePeriod)
-                .add("created=" + created)
-                .add("lastUpdated=" + lastUpdated)
+                .add("statusUpdatePeriod=" + statusUpdatePeriod + "'")
+                .add("created=" + created + "'")
+                .add("lastUpdated=" + lastUpdated + "'")
+                .add("deviceState=" + deviceState)
                 .add("deviceTags=" + deviceTags)
                 .toString();
     }

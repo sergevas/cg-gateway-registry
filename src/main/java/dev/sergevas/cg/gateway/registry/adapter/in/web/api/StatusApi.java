@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
 
 @Path("registry/devices/{deviceId}/status")
 public class StatusApi {
@@ -19,12 +20,14 @@ public class StatusApi {
     private ToDeviceCurrentStateTypeMapper toDeviceCurrentStateMapper;
     @Inject
     private ToUpdateDeviceStatusCommandMapper toUpdateDeviceStatusCommandMapper;
+    @Inject
+    private UriInfo uriInfo;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response getDeviceStatus(@PathParam("deviceId") String deviceId) {
         DeviceCurrentStateType currentStateType = this.toDeviceCurrentStateMapper
-                .map(this.getDeviceCurrentStateQuery.getDeviceStatus(new GetDeviceStatusCommand(deviceId)));
+                .map(this.getDeviceCurrentStateQuery.getDeviceStatus(new GetDeviceStatusCommand(deviceId)), uriInfo);
         return Response.ok().entity(currentStateType).build();
     }
 
@@ -34,7 +37,7 @@ public class StatusApi {
     public Response updateDeviceStatus(@PathParam("deviceId") String deviceId, DeviceStateType stateType) {
         UpdateDeviceStatusCommand updateDeviceStatusCommand = this.toUpdateDeviceStatusCommandMapper.map(deviceId, stateType);
         DeviceCurrentStateType currentStateType = this.toDeviceCurrentStateMapper
-                .map(this.updateDeviceStatusUseCase.updateDeviceStatus(updateDeviceStatusCommand));
+                .map(this.updateDeviceStatusUseCase.updateDeviceStatus(updateDeviceStatusCommand), uriInfo);
         return Response.ok().entity(currentStateType).build();
     }
 }

@@ -1,16 +1,21 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
-import dev.sergevas.cg.gateway.shared.adapter.in.web.HalBuilder;
+import dev.sergevas.cg.gateway.shared.adapter.in.web.hal.HalBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.UriInfo;
+
+import java.util.Optional;
 
 @ApplicationScoped
 class ToDeviceRegistrationTypeMapper {
 
     @Inject
     private HalBuilder halBuilder;
+
+    @Inject
+    private ToDeviceCurrentStateTypeMapper toDeviceCurrentStateTypeMapper;
 
     public void setHalBuilder(HalBuilder halBuilder) {
         this.halBuilder = halBuilder;
@@ -30,6 +35,25 @@ class ToDeviceRegistrationTypeMapper {
                 .path(RegistrationApi.class)
                 .path(deviceRegistration.getDeviceId())
                 .build());
+        Optional.ofNullable(deviceRegistration.getDeviceState())
+                .ifPresent(deviceState -> halBuilder.appendEmbedded(deviceRegistrationType.getEmbedded(),
+                        "status", toDeviceCurrentStateTypeMapper.map(deviceState, uriInfo)));
         return deviceRegistrationType;
     }
 }
+
+/*
+ * "_embedded": {
+ *     "status": {
+ *         "_links": {
+ *             "self": {
+ *             "href": "http://localhost:9080/gateway/registry/devices/{deviceId}/status"
+ *             }
+ *         }
+ *     }
+ * }
+ *
+ *
+ *
+ *
+ * */

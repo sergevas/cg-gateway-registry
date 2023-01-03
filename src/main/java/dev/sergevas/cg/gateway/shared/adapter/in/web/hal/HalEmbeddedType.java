@@ -1,4 +1,4 @@
-package dev.sergevas.cg.gateway.shared.adapter.in.web;
+package dev.sergevas.cg.gateway.shared.adapter.in.web.hal;
 
 import jakarta.json.bind.annotation.JsonbProperty;
 
