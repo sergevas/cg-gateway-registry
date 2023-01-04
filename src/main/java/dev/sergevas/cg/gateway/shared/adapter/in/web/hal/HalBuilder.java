@@ -14,7 +14,6 @@ public class HalBuilder {
     }
 
     public HalBuilder appendEmbedded(Map<String, Object> embedded, String embeddedObjectName, Object embeddedObject) {
-        System.out.println("embeddedObject: [" + embeddedObject + "]");
         embedded.put(embeddedObjectName, embeddedObject);
         return this;
     }

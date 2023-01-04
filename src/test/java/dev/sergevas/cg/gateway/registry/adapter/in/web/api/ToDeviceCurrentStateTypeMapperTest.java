@@ -15,6 +15,7 @@ import java.time.ZoneOffset;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -28,7 +29,8 @@ class ToDeviceCurrentStateTypeMapperTest {
         UriBuilder uriBuilder = mock(UriBuilder.class);
         when(uriBuilder.path(StatusApi.class)).thenReturn(uriBuilder);
         when(uriBuilder.path(anyString())).thenReturn(uriBuilder);
-        when(uriBuilder.build()).thenReturn(URI.create("http://localhost:9080/gateway/registry/devices/0001/status"));
+        when(uriBuilder.buildFromMap(anyMap()))
+                .thenReturn(URI.create("http://localhost:9080/gateway/registry/devices/0001/status"));
         uriInfo = mock(UriInfo.class);
         when(uriInfo.getBaseUriBuilder()).thenReturn(uriBuilder);
     }

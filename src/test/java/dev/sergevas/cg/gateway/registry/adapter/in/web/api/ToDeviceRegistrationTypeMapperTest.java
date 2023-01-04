@@ -2,6 +2,7 @@ package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import dev.sergevas.cg.gateway.shared.adapter.in.web.hal.HalBuilder;
+import dev.sergevas.cg.gateway.shared.adapter.in.web.hal.HalHref;
 import jakarta.ws.rs.core.UriBuilder;
 import jakarta.ws.rs.core.UriInfo;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,7 +62,7 @@ class ToDeviceRegistrationTypeMapperTest {
                 .created(created)
                 .lastUpdated(lastUpdated)
                 .deviceTags(List.of("ESP8266", "SRD-05VDC-SL-C"))
-                .links(Map.of("self", URI.create("http://localhost:9080/gateway/registry/devices/0001")));
+                .links(Map.of("self", new HalHref().href(URI.create("http://localhost:9080/gateway/registry/devices/0001"))));
         ToDeviceRegistrationTypeMapper mapper = new ToDeviceRegistrationTypeMapper();
         mapper.setHalBuilder(new HalBuilder());
         assertEquals(expected, mapper.map(deviceRegistration, uriInfo));
