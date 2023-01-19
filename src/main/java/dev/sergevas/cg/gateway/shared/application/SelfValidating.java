@@ -1,4 +1,4 @@
-package dev.sergevas.cg.gateway.shared;
+package dev.sergevas.cg.gateway.shared.application;
 
 import jakarta.validation.*;
 

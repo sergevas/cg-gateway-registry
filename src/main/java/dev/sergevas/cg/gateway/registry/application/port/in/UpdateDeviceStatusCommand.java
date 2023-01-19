@@ -1,7 +1,7 @@
 package dev.sergevas.cg.gateway.registry.application.port.in;
 
 import dev.sergevas.cg.gateway.registry.domain.StateType;
-import dev.sergevas.cg.gateway.shared.SelfValidating;
+import dev.sergevas.cg.gateway.shared.application.SelfValidating;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
