@@ -108,6 +108,11 @@
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.3.0</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.moditect</groupId>
+                    <artifactId>moditect-maven-plugin</artifactId>
+                    <version>1.0.0.RC1</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -166,6 +171,35 @@
                                     </includes>
                                 </resource>
                             </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.moditect</groupId>
+                <artifactId>moditect-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>create-runtime-image</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>create-runtime-image</goal>
+                        </goals>
+                        <configuration>
+                            <modulePath>
+                                <path>${project.build.directory}/modules</path>
+                            </modulePath>
+                            <modules>
+                                <module>dev.sergevas.cg.gateway</module>
+                            </modules>
+                            <launcher>
+                                <name>dev.sergevas.cg.gateway</name>
+                                <module>dev.sergevas.cg.gateway</module>
+                            </launcher>
+                            <noManPages>true</noManPages>
+                            <noHeaderFiles>true</noHeaderFiles>
+                            <compression>2</compression>
+                            <outputDirectory>${project.build.directory}/jlink</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
