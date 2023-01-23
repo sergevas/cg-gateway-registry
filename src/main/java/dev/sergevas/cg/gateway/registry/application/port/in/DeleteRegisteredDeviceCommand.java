@@ -1,7 +1,6 @@
 package dev.sergevas.cg.gateway.registry.application.port.in;
 
 import dev.sergevas.cg.gateway.shared.application.SelfValidating;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.Objects;
 import java.util.StringJoiner;

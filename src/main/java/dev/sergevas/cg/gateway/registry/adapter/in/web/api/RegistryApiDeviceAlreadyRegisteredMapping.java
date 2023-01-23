@@ -16,3 +16,4 @@ public class RegistryApiDeviceAlreadyRegisteredMapping implements ExceptionMappe
         return Response.status(Response.Status.CONFLICT).entity(error).build();
     }
 }
+

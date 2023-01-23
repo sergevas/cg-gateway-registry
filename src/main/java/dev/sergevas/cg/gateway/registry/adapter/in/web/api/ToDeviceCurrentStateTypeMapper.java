@@ -4,7 +4,7 @@ import dev.sergevas.cg.gateway.registry.domain.DeviceState;
 import dev.sergevas.cg.gateway.shared.adapter.in.web.hal.HalBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.UriInfo;
+//import jakarta.ws.rs.core.UriInfo;
 
 import java.util.Map;
 
