@@ -6,6 +6,7 @@ import dev.sergevas.cg.gateway.registry.application.port.in.UpdateDeviceStatusCo
 import dev.sergevas.cg.gateway.registry.application.port.in.UpdateDeviceStatusUseCase;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
@@ -20,7 +21,7 @@ public class StatusApi {
     private ToDeviceCurrentStateTypeMapper toDeviceCurrentStateMapper;
     @Inject
     private ToUpdateDeviceStatusCommandMapper toUpdateDeviceStatusCommandMapper;
-    @Inject
+    @Context
     private UriInfo uriInfo;
 
     @GET

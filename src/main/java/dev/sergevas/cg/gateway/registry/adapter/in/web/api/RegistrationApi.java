@@ -4,6 +4,7 @@ import dev.sergevas.cg.gateway.registry.application.port.in.*;
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
@@ -13,6 +14,8 @@ import java.util.List;
 @Path("registry/devices")
 public class RegistrationApi {
 
+    @Context
+    UriInfo uriInfo;
     @Inject
     private GetRegisteredDeviceQuery getRegisteredDeviceQuery;
     @Inject
@@ -23,8 +26,6 @@ public class RegistrationApi {
     private UpdateDeviceRegistrationUseCase updateDeviceRegistrationUseCase;
     @Inject
     private DeleteReisteredDevicesUseCase deleteReisteredDevicesUseCase;
-    @Inject
-    UriInfo uriInfo;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
