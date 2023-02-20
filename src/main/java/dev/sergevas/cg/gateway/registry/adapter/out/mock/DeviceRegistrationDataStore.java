@@ -30,7 +30,7 @@ public class DeviceRegistrationDataStore {
         deviceRegistrationStore.put("growlab-IR-CUT_Cam", new DeviceRegistration(
                 "growlab-IR-CUT_Cam",
                 "camera",
-                "http://192.168.1.72:8088/growlab/api/v1/actuators/camera/",
+                "http://192.168.1.72:8088/growlab/api/v1/actuators/camera",
                 10000,
                 OffsetDateTime.now(ZoneOffset.UTC).minusMonths(2L),
                 OffsetDateTime.now(ZoneOffset.UTC).minusMonths(1L),
