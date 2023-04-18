@@ -13,15 +13,12 @@
         <!--        <jakartaee.version>10.0.0</jakartaee.version>-->
         <!--        <microprofile.version>6.0</microprofile.version>-->
         <junitVersion>5.9.2</junitVersion>
-        <mockitoVersion>4.11.0</mockitoVersion>
-        <hibernate-validatorVersion>8.0.0.Final</hibernate-validatorVersion>
-        <expresslyVersion>5.0.0</expresslyVersion>
-        <sqlite-jdbcVersion>3.40.0.0</sqlite-jdbcVersion>
+        <mockitoVersion>5.2.0</mockitoVersion>
     </properties>
     <parent>
         <groupId>io.helidon.applications</groupId>
         <artifactId>helidon-mp</artifactId>
-        <version>3.1.2</version>
+        <version>3.2.0</version>
         <relativePath/>
     </parent>
     <dependencies>
@@ -52,10 +49,6 @@
         <dependency>
             <groupId>jakarta.transaction</groupId>
             <artifactId>jakarta.transaction-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.json.bind</groupId>
-            <artifactId>jakarta.json.bind-api</artifactId>
         </dependency>
         <dependency>
             <groupId>io.helidon.microprofile.bundles</groupId>
@@ -112,7 +105,7 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>${sqlite-jdbcVersion}</version>
+            <version>3.40.1.0</version>
             <scope>provided</scope>
         </dependency>
         <!--        <dependency>-->
@@ -134,16 +127,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.validator</groupId>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validatorVersion}</version>
-            <scope>test</scope>
+            <version>8.0.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.expressly</groupId>
             <artifactId>expressly</artifactId>
-            <version>${expresslyVersion}</version>
-            <scope>test</scope>
+            <version>5.0.0</version>
         </dependency>
         <dependency>
             <groupId>io.helidon.webclient</groupId>
@@ -195,6 +186,13 @@
                         <id>make-index</id>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <configuration>
+                    <buildArgs>--initialize-at-build-time=dev.sergevas.cg.gateway</buildArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>

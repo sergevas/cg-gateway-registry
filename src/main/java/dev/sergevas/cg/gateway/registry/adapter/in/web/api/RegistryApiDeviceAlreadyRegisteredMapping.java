@@ -1,7 +1,7 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import dev.sergevas.cg.gateway.registry.application.port.in.DeviceAlreadyRegisteredException;
-import dev.sergevas.cg.gateway.registry.application.port.in.DeviceNotFoundException;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
@@ -13,6 +13,10 @@ public class RegistryApiDeviceAlreadyRegisteredMapping implements ExceptionMappe
         Error error = new Error()
                 .errorCode("C-0002")
                 .errorMsg(e.getMessage());
-        return Response.status(Response.Status.CONFLICT).entity(error).build();
+        return Response
+                .status(Response.Status.CONFLICT)
+                .entity(error)
+                .type(MediaType.APPLICATION_JSON)
+                .build();
     }
 }
