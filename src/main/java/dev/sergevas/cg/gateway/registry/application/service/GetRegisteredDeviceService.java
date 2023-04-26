@@ -7,19 +7,17 @@ import dev.sergevas.cg.gateway.registry.application.port.out.LoadDeviceRegistrat
 import dev.sergevas.cg.gateway.registry.application.port.out.LoadDeviceState;
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import dev.sergevas.cg.gateway.registry.domain.DeviceState;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@ApplicationScoped
+@Component
 public class GetRegisteredDeviceService implements GetRegisteredDeviceQuery {
 
     private LoadDeviceRegistration loadDeviceRegistration;
     private LoadDeviceState loadDeviceState;
 
-    @Inject
     public GetRegisteredDeviceService(LoadDeviceRegistration loadDeviceRegistration, LoadDeviceState loadDeviceState) {
         this.loadDeviceRegistration = loadDeviceRegistration;
         this.loadDeviceState = loadDeviceState;

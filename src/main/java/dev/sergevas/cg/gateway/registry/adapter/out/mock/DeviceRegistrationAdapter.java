@@ -4,17 +4,20 @@ import dev.sergevas.cg.gateway.registry.application.port.out.DeleteDeviceRegistr
 import dev.sergevas.cg.gateway.registry.application.port.out.LoadDeviceRegistration;
 import dev.sergevas.cg.gateway.registry.application.port.out.SaveDeviceRegistration;
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-@ApplicationScoped
-public class DeviceRegistrationAdapter implements LoadDeviceRegistration,
-        SaveDeviceRegistration,DeleteDeviceRegistration {
 
-    @Inject
-    DeviceRegistrationDataStore deviceRegistrationDataStore;
+@Component
+public class DeviceRegistrationAdapter implements LoadDeviceRegistration,
+        SaveDeviceRegistration, DeleteDeviceRegistration {
+
+    private final DeviceRegistrationDataStore deviceRegistrationDataStore;
+
+    public DeviceRegistrationAdapter(DeviceRegistrationDataStore deviceRegistrationDataStore) {
+        this.deviceRegistrationDataStore = deviceRegistrationDataStore;
+    }
 
     @Override
     public List<DeviceRegistration> load() {
@@ -37,6 +40,6 @@ public class DeviceRegistrationAdapter implements LoadDeviceRegistration,
 
     @Override
     public DeviceRegistration delete(String deviceId) {
-       return this.deviceRegistrationDataStore.getDeviceRegistrationStore().remove(deviceId);
+        return this.deviceRegistrationDataStore.getDeviceRegistrationStore().remove(deviceId);
     }
 }

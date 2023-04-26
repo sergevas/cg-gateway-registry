@@ -1,11 +1,11 @@
 package dev.sergevas.cg.gateway.shared.adapter.in.web.hal;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.util.Map;
 
-@ApplicationScoped
+@Component
 public class HalBuilder {
 
     public HalBuilder appendSelf(Map<String, Object> links, URI selfUri) {

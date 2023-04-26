@@ -2,23 +2,20 @@ package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
 import dev.sergevas.cg.gateway.shared.adapter.in.web.hal.HalBuilder;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import jakarta.ws.rs.core.UriInfo;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@ApplicationScoped
+@Component
 class ToDeviceRegistrationTypeMapper {
 
-    @Inject
-    private HalBuilder halBuilder;
+    private final HalBuilder halBuilder;
+    private final ToDeviceCurrentStateTypeMapper toDeviceCurrentStateTypeMapper;
 
-    @Inject
-    private ToDeviceCurrentStateTypeMapper toDeviceCurrentStateTypeMapper;
-
-    public void setHalBuilder(HalBuilder halBuilder) {
+    public ToDeviceRegistrationTypeMapper(HalBuilder halBuilder, ToDeviceCurrentStateTypeMapper toDeviceCurrentStateTypeMapper) {
         this.halBuilder = halBuilder;
+        this.toDeviceCurrentStateTypeMapper = toDeviceCurrentStateTypeMapper;
     }
 
     DeviceRegistrationType map(DeviceRegistration deviceRegistration, UriInfo uriInfo) {

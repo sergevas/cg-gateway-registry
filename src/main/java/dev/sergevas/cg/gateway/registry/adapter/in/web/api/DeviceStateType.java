@@ -1,7 +1,7 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
-import jakarta.json.bind.annotation.JsonbCreator;
-import jakarta.json.bind.annotation.JsonbProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Device possible states
@@ -22,13 +22,7 @@ public enum DeviceStateType {
         this.value = value;
     }
 
-    @Override
-    @JsonbProperty
-    public String toString() {
-        return String.valueOf(value);
-    }
-
-    @JsonbCreator
+    @JsonCreator
     public static DeviceStateType fromValue(String text) {
         for (DeviceStateType b : DeviceStateType.values()) {
             if (String.valueOf(b.value).equals(text)) {
@@ -36,5 +30,11 @@ public enum DeviceStateType {
             }
         }
         return null;
+    }
+
+    @Override
+    @JsonProperty
+    public String toString() {
+        return String.valueOf(value);
     }
 }

@@ -4,18 +4,16 @@ import dev.sergevas.cg.gateway.registry.application.port.in.UpdateDeviceStatusCo
 import dev.sergevas.cg.gateway.registry.application.port.in.UpdateDeviceStatusUseCase;
 import dev.sergevas.cg.gateway.registry.application.port.out.UpdateDeviceState;
 import dev.sergevas.cg.gateway.registry.domain.DeviceState;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-@ApplicationScoped
+@Component
 public class UpdateDeviceStatusService implements UpdateDeviceStatusUseCase {
 
-    private UpdateDeviceState updateDeviceState;
+    private final UpdateDeviceState updateDeviceState;
 
-    @Inject
     public UpdateDeviceStatusService(UpdateDeviceState updateDeviceState) {
         this.updateDeviceState = updateDeviceState;
     }

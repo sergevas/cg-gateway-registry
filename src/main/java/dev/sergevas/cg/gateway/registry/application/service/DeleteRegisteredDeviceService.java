@@ -5,17 +5,15 @@ import dev.sergevas.cg.gateway.registry.application.port.in.DeleteReisteredDevic
 import dev.sergevas.cg.gateway.registry.application.port.in.DeviceNotFoundException;
 import dev.sergevas.cg.gateway.registry.application.port.out.DeleteDeviceRegistration;
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@ApplicationScoped
+@Component
 public class DeleteRegisteredDeviceService implements DeleteReisteredDevicesUseCase {
 
-    private DeleteDeviceRegistration deleteDeviceRegistration;
+    private final DeleteDeviceRegistration deleteDeviceRegistration;
 
-    @Inject
     public DeleteRegisteredDeviceService(DeleteDeviceRegistration deleteDeviceRegistration) {
         this.deleteDeviceRegistration = deleteDeviceRegistration;
     }

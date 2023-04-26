@@ -3,14 +3,14 @@ package dev.sergevas.cg.gateway.registry.adapter.out.mock;
 import dev.sergevas.cg.gateway.registry.domain.DeviceState;
 import dev.sergevas.cg.gateway.registry.domain.StateType;
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.ApplicationScoped;
+import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@ApplicationScoped
+@Component
 public class DeviceStateDataStore {
 
     private Map<String, DeviceState> deviceStateStore;

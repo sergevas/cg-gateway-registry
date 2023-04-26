@@ -1,6 +1,6 @@
 package dev.sergevas.cg.gateway.proxy.adapter.in.web;
 
-import jakarta.json.bind.annotation.JsonbProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 
@@ -22,8 +22,8 @@ public class ErrorWithDeviceErrorInfo {
         return this;
     }
 
-    @JsonbProperty("errorCode")
-    @Size(max=4)
+    @JsonProperty("errorCode")
+    @Size(max = 4)
     public String getErrorCode() {
         return errorCode;
     }
@@ -40,7 +40,7 @@ public class ErrorWithDeviceErrorInfo {
         return this;
     }
 
-    @JsonbProperty("errorMsg")
+    @JsonProperty("errorMsg")
     public String getErrorMsg() {
         return errorMsg;
     }
@@ -58,7 +58,7 @@ public class ErrorWithDeviceErrorInfo {
     }
 
 
-    @JsonbProperty("deviceResponseHttpCode")
+    @JsonProperty("deviceResponseHttpCode")
     public Integer getDeviceResponseHttpCode() {
         return deviceResponseHttpCode;
     }
@@ -75,8 +75,8 @@ public class ErrorWithDeviceErrorInfo {
         return this;
     }
 
-    @JsonbProperty("deviceErrorCode")
-    @Size(max=4)
+    @JsonProperty("deviceErrorCode")
+    @Size(max = 4)
     public String getDeviceErrorCode() {
         return deviceErrorCode;
     }
@@ -94,7 +94,7 @@ public class ErrorWithDeviceErrorInfo {
     }
 
 
-    @JsonbProperty("deviceErrorMsg")
+    @JsonProperty("deviceErrorMsg")
     public String getDeviceErrorMsg() {
         return deviceErrorMsg;
     }

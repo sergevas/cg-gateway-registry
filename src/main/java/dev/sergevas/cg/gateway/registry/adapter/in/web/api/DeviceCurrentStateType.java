@@ -1,6 +1,6 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
-import jakarta.json.bind.annotation.JsonbProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.OffsetDateTime;
 import java.util.HashMap;
@@ -10,11 +10,11 @@ import java.util.StringJoiner;
 
 public class DeviceCurrentStateType {
 
+    @JsonProperty("_links")
+    Map<String, Object> links = new HashMap<>();
     private String deviceId;
     private DeviceStateType deviceState;
     private OffsetDateTime lastUpdated;
-    @JsonbProperty("_links")
-    Map<String, Object> links = new HashMap<>();
 
     public DeviceCurrentStateType deviceId(String deviceId) {
         this.deviceId = deviceId;

@@ -3,14 +3,17 @@ package dev.sergevas.cg.gateway.registry.adapter.out.mock;
 import dev.sergevas.cg.gateway.registry.application.port.out.LoadDeviceState;
 import dev.sergevas.cg.gateway.registry.application.port.out.UpdateDeviceState;
 import dev.sergevas.cg.gateway.registry.domain.DeviceState;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import org.springframework.stereotype.Component;
 
-@ApplicationScoped
+@Component
 public class DeviceStateAdapter implements LoadDeviceState, UpdateDeviceState {
 
-    @Inject
-    private DeviceStateDataStore mockDeviceStateDataStore;
+
+    private final DeviceStateDataStore mockDeviceStateDataStore;
+
+    public DeviceStateAdapter(DeviceStateDataStore mockDeviceStateDataStore) {
+        this.mockDeviceStateDataStore = mockDeviceStateDataStore;
+    }
 
     @Override
     public DeviceState load(String deviceId) {

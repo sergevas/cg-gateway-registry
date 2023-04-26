@@ -7,21 +7,19 @@ import dev.sergevas.cg.gateway.registry.application.port.out.DeleteDeviceRegistr
 import dev.sergevas.cg.gateway.registry.application.port.out.LoadDeviceRegistration;
 import dev.sergevas.cg.gateway.registry.application.port.out.SaveDeviceRegistration;
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Optional;
 
-@ApplicationScoped
+@Component
 public class UpdateDeviceRegistrationService implements UpdateDeviceRegistrationUseCase {
 
-    private LoadDeviceRegistration loadDeviceRegistration;
-    private SaveDeviceRegistration saveDeviceRegistration;
-    private DeleteDeviceRegistration deleteDeviceRegistration;
+    private final LoadDeviceRegistration loadDeviceRegistration;
+    private final SaveDeviceRegistration saveDeviceRegistration;
+    private final DeleteDeviceRegistration deleteDeviceRegistration;
 
-    @Inject
     public UpdateDeviceRegistrationService(LoadDeviceRegistration loadDeviceRegistration,
                                            SaveDeviceRegistration saveDeviceRegistration,
                                            DeleteDeviceRegistration deleteDeviceRegistration) {
@@ -38,12 +36,12 @@ public class UpdateDeviceRegistrationService implements UpdateDeviceRegistration
         deleteDeviceRegistration.delete(deviceId);
         DeviceRegistration deviceRegistration = updateDeviceRegistrationCommand.getDeviceRegistration();
         return this.saveDeviceRegistration.save(new DeviceRegistration(
-                        deviceRegistration.getDeviceId(),
-                        deviceRegistration.getDeviceType(),
-                        deviceRegistration.getDeviceUri(),
-                        deviceRegistration.getStatusUpdatePeriod(),
-                        deviceRegistration.getCreated(),
-                        OffsetDateTime.now(ZoneOffset.UTC),
-                        deviceRegistration.getDeviceTags()));
+                deviceRegistration.getDeviceId(),
+                deviceRegistration.getDeviceType(),
+                deviceRegistration.getDeviceUri(),
+                deviceRegistration.getStatusUpdatePeriod(),
+                deviceRegistration.getCreated(),
+                OffsetDateTime.now(ZoneOffset.UTC),
+                deviceRegistration.getDeviceTags()));
     }
 }

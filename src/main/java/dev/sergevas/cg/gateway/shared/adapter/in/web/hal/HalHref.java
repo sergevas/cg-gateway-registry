@@ -1,6 +1,6 @@
 package dev.sergevas.cg.gateway.shared.adapter.in.web.hal;
 
-import jakarta.json.bind.annotation.JsonbProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.net.URI;
 import java.util.Objects;
@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 
 public class HalHref {
 
-    @JsonbProperty("href")
+    @JsonProperty("href")
     private URI href;
 
     public URI getHref() {

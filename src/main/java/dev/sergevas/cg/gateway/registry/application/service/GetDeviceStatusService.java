@@ -4,15 +4,13 @@ import dev.sergevas.cg.gateway.registry.application.port.in.GetDeviceStatusComma
 import dev.sergevas.cg.gateway.registry.application.port.in.GetDeviceStatusQuery;
 import dev.sergevas.cg.gateway.registry.application.port.out.LoadDeviceState;
 import dev.sergevas.cg.gateway.registry.domain.DeviceState;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import org.springframework.stereotype.Component;
 
-@ApplicationScoped
+@Component
 public class GetDeviceStatusService implements GetDeviceStatusQuery {
 
-    private LoadDeviceState loadDeviceState;
+    private final LoadDeviceState loadDeviceState;
 
-    @Inject
     public GetDeviceStatusService(LoadDeviceState loadDeviceState) {
         this.loadDeviceState = loadDeviceState;
     }

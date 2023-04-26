@@ -1,28 +1,24 @@
 package dev.sergevas.cg.gateway.proxy.adapter.in.web;
 
 import jakarta.validation.Valid;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Path("proxy/devices")
+@RequestMapping("proxy/devices")
 public class ProxyApi {
 
-    @GET
-    @Path("/{deviceId}/{deviceResource}")
-    @Produces({MediaType.APPLICATION_OCTET_STREAM})
-    public Response getOnDeviceResource(@PathParam("deviceId") String deviceId,
-                                        @PathParam("deviceResource") String deviceResource) {
-        return Response.ok().entity("magic!").build();
+    @GetMapping(path = "/{deviceId}/{deviceResource}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<String> getOnDeviceResource(@PathVariable("deviceId") String deviceId,
+                                                      @PathVariable("deviceResource") String deviceResource) {
+        return ResponseEntity.ok("magic!");
     }
 
-    @POST
-    @Path("/{deviceId}/{deviceResource}")
-    @Consumes({MediaType.APPLICATION_OCTET_STREAM})
-    @Produces({MediaType.APPLICATION_OCTET_STREAM})
-    public Response postOnDeviceResource(@PathParam("deviceId") String deviceId,
-                                         @PathParam("deviceResource") String deviceResource,
-                                         @Valid Object body) {
-        return Response.ok().entity("magic!").build();
+    @PostMapping(path = "/{deviceId}/{deviceResource}", consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE,
+            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public ResponseEntity<String> postOnDeviceResource(@PathVariable("deviceId") String deviceId,
+                                                       @PathVariable("deviceResource") String deviceResource,
+                                                       @Valid @RequestBody Object body) {
+        return ResponseEntity.ok("magic!");
     }
 }

@@ -1,15 +1,16 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
-import jakarta.json.bind.annotation.JsonbProperty;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.OffsetDateTime;
 import java.util.*;
 
 public class DeviceRegistrationType {
 
-    @JsonbProperty("_links")
+    @JsonProperty("_links")
     Map<String, Object> links = new HashMap<>();
-    @JsonbProperty("_embedded")
+    @JsonProperty("_embedded")
     Map<String, Object> embedded = new HashMap<>();
     private String deviceType;
     private String deviceId;

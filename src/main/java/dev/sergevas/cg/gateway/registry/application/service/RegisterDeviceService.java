@@ -6,19 +6,21 @@ import dev.sergevas.cg.gateway.registry.application.port.in.RegisterDeviceUseCas
 import dev.sergevas.cg.gateway.registry.application.port.out.LoadDeviceRegistration;
 import dev.sergevas.cg.gateway.registry.application.port.out.SaveDeviceRegistration;
 import dev.sergevas.cg.gateway.registry.domain.DeviceRegistration;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-@ApplicationScoped
+@Component
 public class RegisterDeviceService implements RegisterDeviceUseCase {
 
-    @Inject
-    private LoadDeviceRegistration loadDeviceRegistration;
-    @Inject
-    private SaveDeviceRegistration saveDeviceRegistration;
+    private final LoadDeviceRegistration loadDeviceRegistration;
+    private final SaveDeviceRegistration saveDeviceRegistration;
+
+    public RegisterDeviceService(LoadDeviceRegistration loadDeviceRegistration, SaveDeviceRegistration saveDeviceRegistration) {
+        this.loadDeviceRegistration = loadDeviceRegistration;
+        this.saveDeviceRegistration = saveDeviceRegistration;
+    }
 
     @Override
     public DeviceRegistration register(RegisterDeviceCommand registerDeviceCommand) {

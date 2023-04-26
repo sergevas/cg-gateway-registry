@@ -1,8 +1,11 @@
 package dev.sergevas.cg.gateway;
 
-import jakarta.ws.rs.ApplicationPath;
-import jakarta.ws.rs.core.Application;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@ApplicationPath("gateway")
-public class CgGatewayApp extends Application {
+@SpringBootApplication
+public class CgGatewayApp {
+    public static void main(String[] args) {
+        SpringApplication.run(CgGatewayApp.class, args);
+    }
 }
