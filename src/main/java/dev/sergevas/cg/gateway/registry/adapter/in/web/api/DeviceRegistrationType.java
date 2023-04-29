@@ -1,17 +1,19 @@
 package dev.sergevas.cg.gateway.registry.adapter.in.web.api;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.OffsetDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-public class DeviceRegistrationType {
+public class DeviceRegistrationType extends RepresentationModel<DeviceRegistrationType> {
 
-    @JsonProperty("_links")
-    Map<String, Object> links = new HashMap<>();
-    @JsonProperty("_embedded")
-    Map<String, Object> embedded = new HashMap<>();
+    //    @JsonProperty("_links")
+//    Map<String, Object> links = new HashMap<>();
+//    @JsonProperty("_embedded")
+//    Map<String, Object> embedded = new HashMap<>();
     private String deviceType;
     private String deviceId;
     private String deviceUri;
@@ -38,23 +40,23 @@ public class DeviceRegistrationType {
         return this;
     }
 
-    public DeviceRegistrationType links(Map<String, Object> links) {
-        this.links = links;
-        return this;
-    }
+//    public DeviceRegistrationType links(Map<String, Object> links) {
+//        this.links = links;
+//        return this;
+//    }
 
-    public Map<String, Object> getLinks() {
-        return links;
-    }
+//    public Map<String, Object> getLinks() {
+//        return links;
+//    }
 
-    public DeviceRegistrationType embedded(Map<String, Object> embedded) {
-        this.embedded = embedded;
-        return this;
-    }
+//    public DeviceRegistrationType embedded(Map<String, Object> embedded) {
+//        this.embedded = embedded;
+//        return this;
+//    }
 
-    public Map<String, Object> getEmbedded() {
-        return embedded;
-    }
+//    public Map<String, Object> getEmbedded() {
+//        return embedded;
+//    }
 
     /**
      * Device type description
@@ -148,13 +150,11 @@ public class DeviceRegistrationType {
                 && Objects.equals(statusUpdatePeriod, that.statusUpdatePeriod)
                 && Objects.equals(created, that.created)
                 && Objects.equals(lastUpdated, that.lastUpdated)
-                && Objects.equals(deviceTags, that.deviceTags)
-                && Objects.equals(links, that.links)
-                && Objects.equals(embedded, that.embedded);
+                && Objects.equals(deviceTags, that.deviceTags);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deviceType, deviceId, deviceUri, statusUpdatePeriod, created, lastUpdated, deviceTags, links, embedded);
+        return Objects.hash(deviceType, deviceId, deviceUri, statusUpdatePeriod, created, lastUpdated, deviceTags);
     }
 }

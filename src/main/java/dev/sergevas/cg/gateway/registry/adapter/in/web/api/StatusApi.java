@@ -4,40 +4,43 @@ import dev.sergevas.cg.gateway.registry.application.port.in.GetDeviceStatusComma
 import dev.sergevas.cg.gateway.registry.application.port.in.GetDeviceStatusQuery;
 import dev.sergevas.cg.gateway.registry.application.port.in.UpdateDeviceStatusCommand;
 import dev.sergevas.cg.gateway.registry.application.port.in.UpdateDeviceStatusUseCase;
-import jakarta.inject.Inject;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Path("registry/devices/{deviceId}/status")
+@RestController
+@RequestMapping("registry/devices/{deviceId}/status")
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class StatusApi {
-    @Inject
-    private GetDeviceStatusQuery getDeviceCurrentStateQuery;
-    @Inject
-    private UpdateDeviceStatusUseCase updateDeviceStatusUseCase;
-    @Inject
-    private ToDeviceCurrentStateTypeMapper toDeviceCurrentStateMapper;
-    @Inject
-    private ToUpdateDeviceStatusCommandMapper toUpdateDeviceStatusCommandMapper;
-    @Inject
-    private UriInfo uriInfo;
 
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getDeviceStatus(@PathParam("deviceId") String deviceId) {
-        DeviceCurrentStateType currentStateType = this.toDeviceCurrentStateMapper
-                .map(this.getDeviceCurrentStateQuery.getDeviceStatus(new GetDeviceStatusCommand(deviceId)), uriInfo);
-        return Response.ok().entity(currentStateType).build();
+    private final GetDeviceStatusQuery getDeviceCurrentStateQuery;
+    private final UpdateDeviceStatusUseCase updateDeviceStatusUseCase;
+    private final ToDeviceCurrentStateTypeMapper toDeviceCurrentStateMapper;
+    private final ToUpdateDeviceStatusCommandMapper toUpdateDeviceStatusCommandMapper;
+
+    public StatusApi(GetDeviceStatusQuery getDeviceCurrentStateQuery,
+                     UpdateDeviceStatusUseCase updateDeviceStatusUseCase,
+                     ToDeviceCurrentStateTypeMapper toDeviceCurrentStateMapper,
+                     ToUpdateDeviceStatusCommandMapper toUpdateDeviceStatusCommandMapper) {
+        this.getDeviceCurrentStateQuery = getDeviceCurrentStateQuery;
+        this.updateDeviceStatusUseCase = updateDeviceStatusUseCase;
+        this.toDeviceCurrentStateMapper = toDeviceCurrentStateMapper;
+        this.toUpdateDeviceStatusCommandMapper = toUpdateDeviceStatusCommandMapper;
     }
 
-    @PUT
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response updateDeviceStatus(@PathParam("deviceId") String deviceId, DeviceStateType stateType) {
+    @GetMapping(produces = "application/hal+json")
+    public ResponseEntity<DeviceCurrentStateType> getDeviceStatus(@PathVariable("deviceId") String deviceId) {
+        DeviceCurrentStateType currentStateType = this.toDeviceCurrentStateMapper
+                .map(this.getDeviceCurrentStateQuery.getDeviceStatus(new GetDeviceStatusCommand(deviceId)));
+        return ResponseEntity.ok(currentStateType);
+    }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/hal+json")
+    public ResponseEntity<DeviceCurrentStateType> updateDeviceStatus(@PathVariable("deviceId") String deviceId, DeviceStateType stateType) {
         UpdateDeviceStatusCommand updateDeviceStatusCommand = this.toUpdateDeviceStatusCommandMapper.map(deviceId, stateType);
         DeviceCurrentStateType currentStateType = this.toDeviceCurrentStateMapper
-                .map(this.updateDeviceStatusUseCase.updateDeviceStatus(updateDeviceStatusCommand), uriInfo);
-        return Response.ok().entity(currentStateType).build();
+                .map(this.updateDeviceStatusUseCase.updateDeviceStatus(updateDeviceStatusCommand));
+        return ResponseEntity.ok(currentStateType);
     }
 }
