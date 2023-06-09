@@ -9,18 +9,17 @@ import jakarta.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @ApplicationScoped
 public class DeviceRegistrationAdapter implements LoadDeviceRegistration,
-        SaveDeviceRegistration,DeleteDeviceRegistration {
+        SaveDeviceRegistration, DeleteDeviceRegistration {
 
     @Inject
     DeviceRegistrationDataStore deviceRegistrationDataStore;
 
     @Override
     public List<DeviceRegistration> load() {
-        List<DeviceRegistration> deviceRegistrations = new ArrayList<>();
-        deviceRegistrations.addAll(this.deviceRegistrationDataStore.getDeviceRegistrationStore().values());
-        return deviceRegistrations;
+        return new ArrayList<>(this.deviceRegistrationDataStore.getDeviceRegistrationStore().values());
     }
 
     @Override
@@ -37,6 +36,6 @@ public class DeviceRegistrationAdapter implements LoadDeviceRegistration,
 
     @Override
     public DeviceRegistration delete(String deviceId) {
-       return this.deviceRegistrationDataStore.getDeviceRegistrationStore().remove(deviceId);
+        return this.deviceRegistrationDataStore.getDeviceRegistrationStore().remove(deviceId);
     }
 }

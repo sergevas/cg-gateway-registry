@@ -16,7 +16,7 @@ public enum DeviceStateType {
     STOPPED("STOPPED"),
     ERROR("ERROR");
 
-    private String value;
+    private final String value;
 
     DeviceStateType(String value) {
         this.value = value;

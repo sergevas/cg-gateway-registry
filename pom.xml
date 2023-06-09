@@ -55,10 +55,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator.version}</version>
-			<scope>test</scope>
+            <version>8.0.0.Final</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.expressly</groupId>
@@ -106,9 +106,9 @@
                 <artifactId>liberty-maven-plugin</artifactId>
                 <configuration>
                     <runtimeArtifact>
-                        <groupId>io.openliberty.beta</groupId>
+                        <groupId>io.openliberty</groupId>
                         <artifactId>openliberty-runtime</artifactId>
-                        <version>23.0.0.4-beta</version>
+                        <version>23.0.0.5</version>
                         <type>zip</type>
                     </runtimeArtifact>
                     <include>minify,runnable</include>

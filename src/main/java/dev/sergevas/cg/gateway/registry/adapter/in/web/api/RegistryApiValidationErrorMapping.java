@@ -11,10 +11,9 @@ public class RegistryApiValidationErrorMapping implements ExceptionMapper<Constr
     public Response toResponse(ConstraintViolationException cve) {
         Error error = new Error()
                 .errorCode("V-0001")
-                .errorMsg(new StringBuilder("Validation error: [")
-                        .append(cve.getMessage())
-                        .append("]")
-                        .toString());
+                .errorMsg("Validation error: [" +
+                        cve.getMessage() +
+                        "]");
         return Response.status(Response.Status.BAD_REQUEST).entity(error).build();
     }
 }

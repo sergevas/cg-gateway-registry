@@ -10,10 +10,9 @@ public class RegistryApiRuntimeErrorMapping implements ExceptionMapper<RuntimeEx
     public Response toResponse(RuntimeException e) {
         Error error = new Error()
                 .errorCode("E-0001")
-                .errorMsg(new StringBuilder("Runtime error: [")
-                        .append(e.getMessage())
-                        .append("]")
-                        .toString());
+                .errorMsg("Runtime error: [" +
+                        e.getMessage() +
+                        "]");
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(error).build();
     }
 }
