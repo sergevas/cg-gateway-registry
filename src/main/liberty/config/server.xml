@@ -4,7 +4,14 @@
         <feature>restfulWS-3.1</feature>
         <feature>jsonb-3.0</feature>
         <feature>beanValidation-3.0</feature>
+        <feature>adminCenter-1.0</feature>
     </featureManager>
+    <basicRegistry id="basic">
+        <user name="admin" password="adminpwd" />
+    </basicRegistry>
+    <administrator-role>
+        <user>admin</user>
+    </administrator-role>
 
     <!-- This template enables security. To get the full use of all the capabilities,
         a keystore and user registry are required. -->
